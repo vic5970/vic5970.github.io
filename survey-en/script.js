@@ -4,7 +4,7 @@ const currentDate = new Date().toLocaleDateString();
 dateElement.textContent = currentDate;
 
 // Countdown timer
-let timeLeft = 300; // Время в секундах
+let timeLeft = 300; //Время в секундах
 const timerElement = document.getElementById('time');
 
 const timer = setInterval(() => {
