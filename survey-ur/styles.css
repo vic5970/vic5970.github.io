@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2e4e, #0f2e4e);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 0 10px 50px;
+}
+
+.offer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.offer h1 {
+    color: #ff0000;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.offer h2 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.offer p {
+    font-size: 1em;
+    color: #34495e;
+}
+.offer button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 17px 40px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 20px;
+    transition: background-color 0.3s ease;
+}
+.offer button:hover {
+    background-color: #218838;
+}
+.timer {
+    font-size: 1.3em;
+    color: #ff0000;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.question {
+    display: none;
+    margin-top: 20px;
+}
+.question p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.answers {
+    margin-top: 10px;
+}
+.answers button {
+    background-color: #006eff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1.0em;
+    width: 98%;
+}
+.answers button:hover {
+    background-color: #2584ff;
+}
+.final-message {
+    display: none;
+    font-size: 1.4em;
+}
+.final-message h3 {
+    font-size: 1.0em;
+}
+.final-message p {
+    font-size: 0.8em;
+}
+.progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 20px;
+}
+.progress {
+    width: 0%;
+    height: 10px;
+    background-color: #4caf50;
+}
+.date {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+.footer {
+/*position: fixed;  Фиксируем блок внизу */
+/*bottom: 0;  Устанавливаем блок внизу экрана */
+left: 0; /* Устанавливаем блок к левому краю */
+width: 100%; /* Ширина блока на весь экран */
+/*background-color: #f3f3f3;  Цвет фона блока */
+color: #d6d6d6; /* Цвет текста */
+font-size: 10px;
+text-align: center; /* Выравнивание текста по центру */
+padding: 10px 0; /* Отступы сверху и снизу */
+/*box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  Небольшая тень для глубины */
+margin-top: 50px;
+z-index: 1000; /* Повышаем уровень слоя, чтобы блок был поверх других элементов */
+}
+
+
