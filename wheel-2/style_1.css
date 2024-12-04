@@ -1,0 +1,37 @@
+.ac_footer {
+    position: relative;
+    top: 10px;
+    height: 0;
+    text-align: center;
+    margin-bottom: 70px;
+    color: #A12000;
+}
+
+.ac_footer a {
+    color: #A12000;
+}
+
+.ac_footer p {
+    text-align: center;
+}
+
+img[height="1"],
+img[width="1"] {
+    display: none !important;
+}
+
+*[attr-cou] {
+    display: none !important;
+}
+
+*[attr-lan] {
+    display: none !important;
+}
+
+.forceDisplay {
+    display: block !important;
+}
+
+.forceDisplayInline {
+    display: inline-block !important;
+}
