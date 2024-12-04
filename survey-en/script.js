@@ -4,7 +4,7 @@ const currentDate = new Date().toLocaleDateString();
 dateElement.textContent = currentDate;
 
 // Countdown timer
-let timeLeft = 180; // Время в секундах
+let timeLeft = 300; // Время в секундах
 const timerElement = document.getElementById('time');
 
 const timer = setInterval(() => {
@@ -18,10 +18,11 @@ const seconds = timeLeft % 60;
 timerElement.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
 if (timeLeft <= 0) {
-clearInterval(timer);
-alert('Time is up! Please try again later.');
+    clearInterval(timer);
+    window.location.href = 'https://a.vivawins.com/click'; // Укажите URL, на который нужно перейти
 }
 }, 1000);
+
 
 
 // Questions and answers
