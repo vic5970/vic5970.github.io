@@ -49,6 +49,22 @@ body {
 .offer button:hover {
     background-color: #218838;
 }
+.butcta {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 17px 40px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 20px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+.butcta:hover {
+    background-color: #218838;
+}
+
 .timer {
     font-size: 1.3em;
     color: #ff0000;
@@ -89,12 +105,14 @@ body {
 .final-message {
     display: none;
     font-size: 1.4em;
+    margin-bottom: 30px;
 }
 .final-message h3 {
     font-size: 1.0em;
 }
 .final-message p {
     font-size: 0.8em;
+    margin-bottom: 35px;
 }
 .progress-bar {
     width: 100%;
