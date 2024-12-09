@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>💵 Congratulations!</title>
+  <link rel="shortcut icon" href="cfcc842e161331dc94f63d554603f97bb44ecb3e.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="a-nav">
+    <div class="icon-nav"></div>
+    <h1>Freedom Offer - Win PKR 100,000!</h1>
+    <div class="icon-basket"></div>
+  </div>
+  <main>
+    <div class="content">
+      <div class="main-content">
+        <div style="text-align:center">
+          <img src="azadi1.png" alt="Freedom Image">
+        </div>
+        <center>
+          <div class="select">
+            You have <font color="red"><b><span id="mins">00</span>:<span id="secs">59</span></b></font> left to participate,
+            or the reward will go to someone else!
+          </div>
+        </center>
+        <center style="padding-top:10px">
+          <strong>Note: Limited time offer! Act quickly to secure your reward.</strong>
+        </center>
+        <div id="spinner">
+          <img id="spinBG" src="bg.png" alt="Background">
+          <img id="spin" src="roller.webp" alt="Spinner">
+          <img id="win" src="click.png" alt="Click Here">
+          <img class="animated rotateIn" id="iphone" src="money.webp" alt="Winning Money" loading="lazy">
+        </div>
+        <hr>
+        <div class="comments-section">
+          <h2>User Comments</h2>
+          <div class="comment">
+            <img src="female-1.jpg" alt="User 1">
+            <div>
+              <b>Fatima Khan</b>
+              <p>I received my money today! I’m so happy!</p>
+              <small>4 minutes ago</small>
+            </div>
+          </div>
+          <div class="comment">
+            <img src="male-1.jpg" alt="User 2">
+            <div>
+              <b>Mohammad Ali</b>
+              <p>I didn’t win anything… Can I get another chance?</p>
+              <small>5 minutes ago</small>
+            </div>
+          </div>
+          <div class="comment">
+            <img src="female-2.jpg" alt="User 3">
+            <div>
+              <b>Ayesha Nawaz</b>
+              <p>The amount was transferred to my PayPal account today. Thank you!</p>
+              <small>11 minutes ago</small>
+            </div>
+          </div>
+          <div class="comment">
+            <img src="male-2.jpg" alt="User 4">
+            <div>
+              <b>Ahmed Khan</b>
+              <p>Oh my God! I won PKR 100,000! Wow!</p>
+              <small>15 minutes ago</small>
+            </div>
+          </div>
+          <div class="comment">
+            <img src="female-3.jpg" alt="User 5">
+            <div>
+              <b>Maryam Farooqi</b>
+              <p>I won but forgot to submit my details. How unfortunate!</p>
+              <small>45 minutes ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // Timer script for countdown
+    let mins = 0;
+    let secs = 59;
+    const timer = setInterval(() => {
+      if (secs === 0) {
+        if (mins === 0) {
+          clearInterval(timer);
+          alert("Time's up! The reward has been given to someone else.");
+        } else {
+          mins--;
+          secs = 59;
+        }
+      } else {
+        secs--;
+      }
+      document.getElementById("mins").innerText = mins.toString().padStart(2, '0');
+      document.getElementById("secs").innerText = secs.toString().padStart(2, '0');
+    }, 1000);
+  </script>
+</body>
+
+</html>
