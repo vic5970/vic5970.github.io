@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="usd-money-95707.ico">
-
-                    <!--Optional, send client hints to get accurate device data-->
-                    <meta http-equiv="delegate-ch"
-                    content="sec-ch-ua https://a.vivawins.com; sec-ch-ua-mobile https://a.vivawins.com; sec-ch-ua-arch https://a.vivawins.com; sec-ch-ua-model https://a.vivawins.com; sec-ch-ua-platform https://a.vivawins.com; sec-ch-ua-platform-version https://a.vivawins.com; sec-ch-ua-bitness https://a.vivawins.com; sec-ch-ua-full-version-list https://a.vivawins.com; sec-ch-ua-full-version https://a.vivawins.com" />
-            
-                <!-- MaxConv Tracking Script Base Code-->
-                <script>!function (w, d, o, n, c) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; var s = d.createElement(n), t = d.getElementsByTagName(n)[0]; s.async = !0; s.defer = !0; s.src = "https://a.vivawins.com/t/t.js"; t.parentNode.insertBefore(s, t); }(window, document, "maxconv", "script");</script>
-                <noscript>
-                    <link rel="stylesheet" href="https://a.vivawins.com/t/t.css?mc_ns=1" />
-                </noscript>
-                <!-- End MaxConv Tracking Script Base Code-->
-                 
     <title>Online Income Access</title>
+            <!--Optional, send client hints to get accurate device data-->
+            <meta http-equiv="delegate-ch"
+            content="sec-ch-ua https://a.vivawins.com; sec-ch-ua-mobile https://a.vivawins.com; sec-ch-ua-arch https://a.vivawins.com; sec-ch-ua-model https://a.vivawins.com; sec-ch-ua-platform https://a.vivawins.com; sec-ch-ua-platform-version https://a.vivawins.com; sec-ch-ua-bitness https://a.vivawins.com; sec-ch-ua-full-version-list https://a.vivawins.com; sec-ch-ua-full-version https://a.vivawins.com" />
+    
+        <!-- MaxConv Tracking Script Base Code-->
+        <script>!function (w, d, o, n, c) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; var s = d.createElement(n), t = d.getElementsByTagName(n)[0]; s.async = !0; s.defer = !0; s.src = "https://a.vivawins.com/t/t.js"; t.parentNode.insertBefore(s, t); }(window, document, "maxconv", "script");</script>
+        <noscript>
+            <link rel="stylesheet" href="https://a.vivawins.com/t/t.css?mc_ns=1" />
+        </noscript>
+        <!-- End MaxConv Tracking Script Base Code-->
     <style>
         :root {
             --gold: #FFD700;
@@ -143,10 +141,8 @@
             background: linear-gradient(135deg, #FFFFFF 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: var(--gold, #FFD700); /* Резервный цвет */
             margin-bottom: 1rem;
             line-height: 1.2;
-            
         }
 
         .income-value {
@@ -311,12 +307,10 @@
             <img src="flag-bw.webp" alt="Botswana Flag" class="flag"> VIP OPPORTUNITY
         </div>
 
-        <h1>Make Money Online</h1>
+        <h1>Earn Money Online</h1>
         
         <div class="income-value">
-            <span class="currency">$</span>
-            <span>500</span>
-            <span class="currency">/Day</span>
+            <span class="currency">From 5,000 BWP / Day</span>
         </div>
         
         <p class="tagline">Join Thousands of Successful Online Earners Today!</p>
@@ -325,41 +319,42 @@
             <div class="status-progress"></div>
         </div>
 
-        <div class="timer" id="countdown">
-            Limited Time Offer: 2:45
-        </div>
+        <div class="timer" id="countdown">Limited Time Offer: 3:35</div>
+        <a href="https://a.vivawins.com/click" class="cta-button">DOWNLOAD NOW <span>💰</span></a>
         
-        <!--<button class="cta-button" id="ctaButton">DOWNLOAD NOW<span>💰</span></button>-->
-        <a href="https://a.vivawins.com/click" id="" class="cta-button" >DOWNLOAD NOW<span>💰</span></a>
-
     </div>
 
     <script>
         function startCountdown() {
-            let timeLeft = 165; // 2:45 in seconds
+            let timeLeft = 215; // 3:35 in seconds
             const countdownElement = document.getElementById('countdown');
-            
+            if (!countdownElement) {
+                console.error('Element with ID "countdown" not found.');
+                return;
+            }
+    
             const timer = setInterval(() => {
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                
+    
                 countdownElement.textContent = `Limited Time Offer: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                
+    
                 if (timeLeft <= 0) {
                     clearInterval(timer);
                     countdownElement.textContent = 'Offer Expired!';
                 }
-                
+    
                 timeLeft--;
             }, 1000);
+    
+            // Initialize immediately
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            countdownElement.textContent = `Limited Time Offer: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
-
-        document.getElementById('ctaButton').addEventListener('click', function() {
-            window.location.href = 'https://www.google.com';
-        });
-
         startCountdown();
     </script>
+    
 </body>
 
 
