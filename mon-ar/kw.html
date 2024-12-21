@@ -19,11 +19,13 @@
 
     <style>
         :root {
-            --gold-primary: #FFD700;
-            --gold-secondary: #ecb834;
-            --gold-dark: #B8860B;
-            --dark: #000f0d;
-            --card-bg: #001f16;
+            --gold-primary: #FFD700; /* Золотой основной */
+            --gold-secondary: #ecb834; /* Золотой дополнительный */
+            --gold-dark: #B8860B; /* Тёмно-золотой */
+            --green-primary: #00a86b; /* Зелёный основной (свежий и богатый оттенок) */
+            --green-secondary: #007d5a; /* Тёмно-зелёный (для баланса) */
+            --dark: #001f13; /* Тёмный фон с зелёным подтоном */
+            --card-bg: #002b1a; /* Фон карточки с лёгким зелёным оттенком */
         }
 
         * {
@@ -89,7 +91,8 @@
 
         h1 {
             font-size: 1.8rem;
-            color: var(--gold-primary);
+            /*color: var(--gold-primary);*/
+            color: var(--green-primary); /* Основной зелёный */
             text-align: center;
             line-height: 1.2;
             font-weight: 800;
@@ -175,7 +178,8 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--dark);
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+            /*background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));*/
+            background: linear-gradient(135deg, var(--green-primary), var(--gold-primary)); /* Зелёно-золотой градиент */
             border: none;
             border-radius: 10px;
             cursor: pointer;
