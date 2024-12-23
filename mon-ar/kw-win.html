@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="usd-money-95707.ico">
+    <link rel="stylesheet" href="kw-win-styles.css">
+    <title>فرصتك الذهبية للكسب!</title>
+    <!--Optional, send client hints to get accurate device data-->
+    <meta http-equiv="delegate-ch"
+          content="sec-ch-ua https://a.vivawins.com; sec-ch-ua-mobile https://a.vivawins.com; sec-ch-ua-arch https://a.vivawins.com; sec-ch-ua-model https://a.vivawins.com; sec-ch-ua-platform https://a.vivawins.com; sec-ch-ua-platform-version https://a.vivawins.com; sec-ch-ua-bitness https://a.vivawins.com; sec-ch-ua-full-version-list https://a.vivawins.com; sec-ch-ua-full-version https://a.vivawins.com" />
+
+    <!-- MaxConv Tracking Script Base Code-->
+    <script>!function (w, d, o, n, c) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; var s = d.createElement(n), t = d.getElementsByTagName(n)[0]; s.async = !0; s.defer = !0; s.src = "https://a.vivawins.com/t/t.js"; t.parentNode.insertBefore(s, t); }(window, document, "maxconv", "script");</script>
+    <noscript>
+        <link rel="stylesheet" href="https://a.vivawins.com/t/t.css?mc_ns=1" />
+    </noscript>
+    <!-- End MaxConv Tracking Script Base Code-->
+</head>
+<body>
+    <div class="money-particles"></div>
+    <div class="container" dir="rtl">
+        <div class="glow-effect"></div>
+        <div class="vip-badge">
+            <img src="flag-kw.webp" alt="فرصتك الذهبية للكسب!" class="flag"> فرصتك الذهبية للكسب!
+        </div>
+
+        <h1>اربح جوائز ضخمة يومياً</h1>
+        
+        <div class="income-value">
+            <span class="currency">ابدأ اليوم بكسب 500 دينار كويتي أو أكثر يومياً بسهولة!</span>
+        </div>
+        
+        <p class="tagline">🎉 كن جزءاً من آلاف الفائزين السعداء في الكويت!  
+            🔥 لا تفوت هذه الفرصة النادرة – العرض ينتهي قريباً! اضغط الآن للبدء!</p>
+        
+        <div class="status-bar">
+            <div class="status-progress"></div>
+        </div>
+
+        <div class="timer" id="countdown">ينتهي العرض خلال: 3:35</div>
+        
+        <a href="https://a.vivawins.com/click" class="cta-button">💰 ابدأ رحلتك نحو الربح الآن!</a>
+    </div>
+
+    <script>
+        function startCountdown() {
+            let timeLeft = 215; // 3:35 in seconds
+            const countdownElement = document.getElementById('countdown');
+            if (!countdownElement) {
+                console.error('Element with ID "countdown" not found.');
+                return;
+            }
+    
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+    
+                countdownElement.textContent = `ينتهي العرض خلال: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    countdownElement.textContent = 'انتهى العرض!';
+                    window.location.href = 'https://a.vivawins.com/click';
+                }
+    
+                timeLeft--;
+            }, 1000);
+    
+            // Initialize immediately
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            countdownElement.textContent = `ينتهي العرض خلال: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        startCountdown();
+    </script>
+</body>
+</html>
