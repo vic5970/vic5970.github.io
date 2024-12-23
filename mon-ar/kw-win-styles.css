@@ -1,9 +1,16 @@
-:root {
+/*:root {
     --gold: #FFD700;
     --success: #00C853;
     --royal-blue: #2D3DDF;
     --dark: #0A0F29;
     --card-bg: #111936;
+}*/
+:root {
+    --gold: #FFD700;
+    --success: #00C853;
+    --royal-blue: #2D3DDF;
+    --dark: #000f0d;
+    --card-bg: #001f16;
 }
 
 
@@ -151,7 +158,7 @@ h1 {
 }
 
 .tagline {
-    color: #A0AEC0;
+    color: #b8dbcb;
     font-size: 1.1rem;
     margin-bottom: 2rem;
     line-height: 1.5;
