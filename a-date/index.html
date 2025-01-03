@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/love_heart_icon_178900.ico">
+    <title>Age verification</title>
+
+
+    
+    <style>
+        /* Сброс стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Семейства шрифтов с поддержкой всех мировых языков */
+        body, html {
+            height: 100%;
+            font-family: 'Noto Sans', 'Arial Unicode MS', Arial, sans-serif;
+            background-color: black;
+        }
+
+        /* Контейнер видео */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Фоновые изображения для десктопа и мобильных */
+        @media (min-width: 769px) {
+            .video-container {
+                background-image: url('img/bg4.jpg'); /* Замените на путь к вашему изображению для десктопа */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                background-image: url('img/phon-mobile-2.webp'); /* Замените на путь к вашему изображению для мобильных */
+            }
+        }
+        /* Контролы видео */
+        .controls {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .play-button,
+        .fullscreen-button {
+            color: white;
+            font-size: 18px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            margin: 0 10px;
+            background-color: #333;
+            height: 3px;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 7%;
+            height: 100%;
+            background-color: #ff0000;
+        }
+
+        .time-display {
+            color: white;
+            font-size: 14px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Окно подтверждения возраста */
+        .confirmation-window {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 350px;
+            padding: 20px 20px 30px 20px ;
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        .confirmation-text {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .confirm-button, .cancel-button, a:link {
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 48%;
+            text-decoration: none;
+        }
+
+        .confirm-button {
+            background-color: #5cb85c;
+            animation: blink 0.75s infinite;
+        }
+
+        .cancel-button {
+            background-color: #d9534f;
+        }
+
+        /* Крутящаяся иконка загрузки */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #7de5ff;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Анимация загрузки */
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-wrap: nowrap;
+            }
+
+            .confirmation-window {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+ /* Анимация кнопок */
+        @keyframes blink {
+            0% {
+    background-color: #00FF48;
+    box-shadow: 0 0 3px #00FF48;
+}
+50% {
+    background-color: #00B233;
+    box-shadow: 0 0 20px #00B233;
+}
+100% {
+    background-color: #00FF48;
+    box-shadow: 0 0 3px #00FF48;
+}
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Крутящаяся иконка загрузки -->
+        <div class="loader"></div>
+
+        <!-- Окно подтверждения возраста -->
+        <div class="confirmation-window">
+            <p class="confirmation-text" id="trans1">By clicking 'Continue', you confirm that you are 21 years of age or older.</p>
+            <div class="button-group">
+                <a href="https://a.vivawins.com/click" class="confirm-button" id="trans3">Continue</a>
+                <a href="https://a.vivawins.com/click" class="cancel-button" id="trans2">Close</a>
+
+                
+            </div>
+        </div>
+
+
+        <!-- Контролы видео 
+        <div class="controls">
+            <button class="play-button">▶</button>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <span class="time-display">0:07 / 1:38</span>
+            <button class="fullscreen-button">⛶</button>
+        </div>-->
+    </div>
+
+    <script>
+        // Function to get the full browser language code
+        function getBrowserLanguage() {
+            return navigator.language || navigator.userLanguage;
+        }
+
+        // Function to dynamically load translations
+        async function loadTranslations(lang) {
+            const primaryLang = lang.split('-')[0];  // Extract primary language (e.g., "fr" from "fr-CA")
+            
+            // Try to load the full language code translations first, then fallback to the primary language
+            try {
+                const response = await fetch(`translations/${lang}.json`);
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.warn(`No specific translations found for: ${lang}. Trying primary language: ${primaryLang}`);
+            }
+
+            // Fallback to primary language
+            try {
+                const response = await fetch(`translations/${primaryLang}.json`);
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.warn(`No primary language translations found for: ${primaryLang}.`);
+            }
+
+            // Fallback to English if all else fails
+            try {
+                const response = await fetch(`translations/en.json`);
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.error("Failed to load fallback English translations.");
+            }
+
+            return null;
+        }
+
+        // Function to apply translations to the specified elements
+        async function applyTranslations() {
+            const lang = getBrowserLanguage();
+            console.log(`Detected language: ${lang}`);
+
+            // Try to load translations for the detected language
+            const translations = await loadTranslations(lang);
+            if (translations) {
+                // Apply translations to the elements
+                document.getElementById('trans1').innerHTML = translations['trans1'] || document.getElementById('trans1').innerHTML;
+                document.getElementById('trans2').innerHTML = translations['trans2'] || document.getElementById('trans2').innerHTML;
+                document.getElementById('trans3').innerHTML = translations['trans3'] || document.getElementById('trans3').innerHTML;
+            } else {
+                console.log(`No translations available for the language: ${lang}`);
+            }
+        }
+
+        // Apply translations on document load
+        document.addEventListener('DOMContentLoaded', applyTranslations);
+    </script>
+</body>
+</html>
