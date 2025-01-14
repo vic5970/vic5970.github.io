@@ -126,15 +126,19 @@
     }
 
     .confirm-button, .cancel-button, a:link {
-        padding: 10px;
-        font-size: 18px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 48%;
-        text-decoration: none;
-    }
+    display: flex; /* Включаем Flexbox для кнопок */
+    align-items: center; /* Выравниваем по вертикали */
+    justify-content: center; /* Выравниваем по горизонтали */
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%;
+    text-decoration: none;
+    text-align: center; /* На случай длинных текстов */
+}
 
     .confirm-button {
         background-color: #5cb85c;
