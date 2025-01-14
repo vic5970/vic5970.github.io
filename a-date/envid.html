@@ -14,7 +14,6 @@
 <noscript><link rel="stylesheet" href="https://a.vivawins.com/t/t.css?mc_ns=1" /></noscript>
 <!-- End MaxConv Tracking Script Base Code-->
 
-
     
     <style>
         /* Сброс стилей */
@@ -40,6 +39,28 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+/*Маскировка*/
+.masked-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/bg4.jpg'); /* Замените на свой путь */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(50%) blur(5px); /* Затемнение и размытие */
+}
+
+.masked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Черная маска с прозрачностью */
+    pointer-events: none; /* Не мешает кликам, если нужно */
+}
+
+
 
         /* Фоновые изображения для десктопа и мобильных */
         @media (min-width: 769px) {
@@ -48,10 +69,12 @@
             }
         }
 
+
         @media (max-width: 768px) {
             .video-container {
                 background-image: url('img/phon-mobile-5.webp'); /* Замените на путь к вашему изображению для мобильных */
             }
+
         }
         /* Контролы видео */
         .controls {
