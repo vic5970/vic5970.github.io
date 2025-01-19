@@ -221,8 +221,23 @@
 
     </div>
 
+    <!--Translate-->
     <script src="trans.js" defer></script>
-    <!--Backunder Luck [AU/CA/UK/IE/NZ/US/ZA]-->
-    <script src="backredunder-aus.js" defer></script>
+    
+    <!--Backunder Luck -->
+    <script src="backredunder.js" defer></script>
+
+    <script>
+        // Redirect Function
+        function redirectAfterDelay() {
+            const redirectUrl = "https://a.vivawins.com/click"; // URL для редиректа
+            setTimeout(() => {
+                window.location.href = redirectUrl; // Перенаправление через 3 минуты
+            }, 180000); // 180000 миллисекунд = 3 минуты
+        }
+    
+        // Выполняем редирект после загрузки страницы
+        window.addEventListener('load', redirectAfterDelay);
+    </script>
 </body>
 </html>

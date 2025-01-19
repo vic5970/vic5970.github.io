@@ -28,11 +28,3 @@ if (typeof back !== "undefined" && back !== null) {
     })();
 }
 
-// Redirect Function
-function redirectAfterDelay() {
-    const redirectUrl = "https://a.vivawins.com/click";
-    setTimeout(() => {
-        window.location.href = redirectUrl;
-    }, 180000); // 3 минуты
-}
-window.addEventListener('load', redirectAfterDelay);
