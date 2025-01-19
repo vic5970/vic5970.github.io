@@ -1,4 +1,4 @@
-// Backunder Luck [AU/CA/UK/IE/NZ/US/ZA]
+// Backunder Luck [AU/CA/UK/IE/NZ/US/ZA] SL/ADULT-DATING
 var back = 'https://a.vivawins.com/visit/efc684d5-deb4-47f4-a8e7-f382d3440bf3?track=BackButton';
 var under = 'https://a.vivawins.com/visit/1fdc5092-6f41-4b22-8b2c-2fff99157b2b?track=Under';
 
