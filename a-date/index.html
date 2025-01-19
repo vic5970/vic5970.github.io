@@ -14,7 +14,8 @@
 <noscript><link rel="stylesheet" href="https://a.vivawins.com/t/t.css?mc_ns=1" /></noscript>
 <!-- End MaxConv Tracking Script Base Code-->
 
-
+<!--Backunder Luck -->
+<script src="backredunder.js" defer></script>
     
     <style>
         /* Сброс стилей */
@@ -220,9 +221,20 @@
 
 
     </div>
-
+    <!--Translate-->
     <script src="trans.js" defer></script>
-    <!--Backunder Luck [CLOBAL] -->
-    <script src="backredunder.js" defer></script>
+    
+    <script>
+        // Redirect Function
+        function redirectAfterDelay() {
+            const redirectUrl = "https://a.vivawins.com/click"; // URL для редиректа
+            setTimeout(() => {
+                window.location.href = redirectUrl; // Перенаправление через 3 минуты
+            }, 180000); // 180000 миллисекунд = 3 минуты
+        }
+    
+        // Выполняем редирект после загрузки страницы
+        window.addEventListener('load', redirectAfterDelay);
+    </script>
 </body>
 </html>
