@@ -1,6 +1,6 @@
 // Backunder Luck [CLOBAL] SL/ADULT-DATING
-var back = 'https://a.vivawins.com/visit/821f7be2-02b0-4210-8cc9-1e01b769eaef?track=BackButton';
-var under = 'https://a.vivawins.com/visit/0b968054-fb69-4c9e-9de4-32de5782273a?track=Under';
+var back = 'https://a.vivawins.com/visit/821f7be2-02b0-4210-8cc9-1e01b769eaef?track=BackButton&subsource={traffic_source_id}';
+var under = 'https://a.vivawins.com/visit/0b968054-fb69-4c9e-9de4-32de5782273a?track=Under&subsource={traffic_source_id}';
 
 if (typeof under !== "undefined" && under !== null) {
     document.addEventListener('click', function(event) {
