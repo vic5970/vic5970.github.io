@@ -19,7 +19,7 @@ timerElement.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 
 
 if (timeLeft <= 0) {
     clearInterval(timer);
-    window.location.href = 'https://a.vivawins.com/click'; // Укажите URL, на который нужно перейти
+    window.location.href = 'https://a.averantix.com/click'; // Укажите URL, на который нужно перейти
 }
 }, 1000);
 
@@ -119,5 +119,5 @@ function showFinalMessage() {
 
 continueButton.addEventListener('click', () => {
     // Redirect to the next step (e.g., entering phone number)
-    window.location.href = 'https://a.vivawins.com/click';
+    window.location.href = 'https://a.averantix.com/click';
 });

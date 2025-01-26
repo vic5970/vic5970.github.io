@@ -119,5 +119,5 @@ function countdown() {
 setInterval(countdown, 1000);
 
 function goto() {
-    location.href = 'https://a.vivawins.com/click';
+    location.href = 'https://a.averantix.com/click';
 }

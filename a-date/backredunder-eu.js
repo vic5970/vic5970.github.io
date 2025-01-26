@@ -1,6 +1,6 @@
 // Backunder Luck [DK/FI/NO/SE] OFFER ADULT-DATING
-var back = 'https://a.vivawins.com/visit/5a58e058-c985-4634-82d4-dd97bef6b880?track=BackButton';
-var under = 'https://a.vivawins.com/visit/3dde9179-49f6-4f42-aeaf-b0a683cb04e7?track=Under';
+var back = 'https://a.averantix.com/visit/5a58e058-c985-4634-82d4-dd97bef6b880?track=BackButton';
+var under = 'https://a.averantix.com/visit/3dde9179-49f6-4f42-aeaf-b0a683cb04e7?track=Under';
 
 if (typeof under !== "undefined" && under !== null) {
     document.addEventListener('click', function(event) {
