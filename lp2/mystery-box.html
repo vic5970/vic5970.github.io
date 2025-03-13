@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Mystery Box Rewards</title>
+    <style>
+        :root {
+            --primary: #6366F1;
+            --secondary: #4F46E5;
+            --gold: #F59E0B;
+            --mysteryPurple: #9333EA;
+            --dark: #0A0118;
+            --card-bg: #130A2A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+    padding: 0.5rem;
+    position: relative;
+    overflow: hidden;
+        }
+        .chance-highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        .container {
+    width: 100%;
+    max-width: 340px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    margin: 0.5rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+        }
+
+        .mystery-badge {
+            background: linear-gradient(135deg, var(--mysteryPurple), var(--secondary));
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+            align-self: center;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2rem);
+            background: linear-gradient(135deg, #FFFFFF, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .tagline {
+            color: #A5B4FC;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .mystery-box {
+            width: clamp(140px, 40vw, 160px);
+            height: clamp(140px, 40vw, 160px);
+            margin: 1rem auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: boxFloat 4s infinite ease-in-out;
+        }
+
+        .box-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--mysteryPurple), var(--secondary));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-mark {
+            font-size: clamp(3rem, 8vw, 4rem);
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: questionBounce 2s infinite;
+        }
+
+        .potential-prizes {
+            height: 40px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .prize-scroll {
+            display: flex;
+            gap: 0.8rem;
+            animation: scroll 20s linear infinite;
+        }
+
+        .prize-item {
+            background: rgba(147, 51, 234, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .timer {
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--mysteryPurple), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+
+        .chance-info {
+            color: #A5B4FC;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-height: 600px) {
+            .container {
+                padding: 1rem;
+                gap: 0.8rem;
+            }
+
+            .mystery-box {
+                width: 120px;
+                height: 120px;
+                margin: 0.5rem auto;
+            }
+
+            .question-mark {
+                font-size: 2.5rem;
+            }
+
+            .potential-prizes {
+                height: 35px;
+                margin: 0.3rem 0;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+        max-width: 320px;
+        padding: 0.8rem;
+    }
+    .mystery-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+            .prize-item {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .timer {
+                font-size: 0.85rem;
+            }
+
+            .cta-button {
+                font-size: 0.9rem;
+            }
+            .mystery-box {
+        width: 130px;
+        height: 130px;
+    }
+    .timer, .cta-button {
+        padding: 0.8rem;
+    }
+    @media (min-width: 361px) and (max-width: 400px) {
+    .container {
+        max-width: 340px;
+    }
+
+    .mystery-box {
+        width: 150px;
+        height: 150px;
+    }
+}
+/* تحسينات للأجهزة الطويلة */
+@media (min-height: 701px) {
+    .container {
+        gap: 1rem;
+    }
+
+    .mystery-box {
+        margin: 1rem auto;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة جداً */
+@media (max-height: 600px) {
+    body {
+        align-items: flex-start;
+        padding-top: 0.5rem;
+    }
+
+    .container {
+        gap: 0.5rem;
+    }
+
+    .mystery-box {
+        width: 120px;
+        height: 120px;
+        margin: 0.3rem auto;
+    }
+
+    .potential-prizes {
+        margin: 0.2rem 0;
+    }
+
+    .prize-item {
+        padding: 0.3rem 0.8rem;
+    }
+}
+        }
+
+        /* الحفاظ على الرسوم المتحركة الأصلية */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes boxFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes questionBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mystery-badge">
+            ✨ MYSTERY BOX
+        </div>
+        
+        <h1>Open Your Lucky Box!</h1>
+        
+        <p class="tagline">What's Inside? Premium Surprises Await!</p>
+
+        <div class="mystery-box">
+            <div class="box-face">
+                <div class="question-mark">?</div>
+            </div>
+        </div>
+
+        <div class="potential-prizes">
+            <div class="prize-scroll">
+                <div class="prize-item">🎮 Gaming Console</div>
+                <div class="prize-item">💰 $1000 Cash</div>
+                <div class="prize-item">📱 Latest iPhone</div>
+                <div class="prize-item">💎 Premium Gifts</div>
+                <div class="prize-item">🎁 Mystery Prize</div>
+            </div>
+        </div>
+
+        <div class="timer" id="countdown">
+            <span>⏰</span>
+            <span>Box Expires In: 2:45</span>
+        </div>
+        
+        <button class="cta-button" id="ctaButton">
+            OPEN YOUR BOX NOW! 🎁
+        </button>
+
+        <p class="chance-info">
+            <span class="chance-highlight">87 people</span> already discovered their prizes today!
+        </p>
+    </div>
+
+    <script>
+        // الحفاظ على JavaScript كما هو
+        function startCountdown() {
+            let timeLeft = 165;
+            const countdownElement = document.getElementById('countdown');
+            
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.innerHTML = `
+                    <span>⏰</span>
+                    <span>Box Expires In: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}</span>
+                `;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = `
+                        <span>⏰</span>
+                        <span>Box Expired!</span>
+                    `;
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+
+        document.getElementById('ctaButton').addEventListener('click', function() {
+            const box = document.querySelector('.mystery-box');
+            box.style.transform = 'rotate(360deg) scale(1.2)';
+            box.style.transition = 'transform 0.5s ease';
+            
+            setTimeout(() => {
+                window.location.href = 'https://a.averantix.com/click';
+            }, 500);
+        });
+
+        startCountdown();
+    </script>
+</body>
+
+
+</html>

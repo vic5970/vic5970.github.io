@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Prosperity Vision</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #4338CA;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --love: #EC4899;
+            --dark: #0A0F22;
+            --card-bg: #131836;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark);
+            padding: 0.5rem;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 360px;
+            padding: 1.2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(79, 70, 229, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--love), var(--accent));
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .vision-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0.5rem auto;
+            background: linear-gradient(135deg, var(--primary), var(--love));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
+            position: relative;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .vision-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), transparent, var(--love));
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .headline {
+            font-size: 1.8rem;
+            color: white;
+            text-align: center;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0;
+            background: linear-gradient(135deg, #fff, #E0E7FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .tagline {
+            color: #A5B4FC;
+            font-size: 0.95rem;
+            text-align: center;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+
+
+        .dream-text {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+        }
+
+        .benefit {
+            background: rgba(79, 70, 229, 0.05);
+            padding: 0.8rem;
+            border-radius: 12px;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit:hover {
+            transform: translateY(-2px);
+            background: rgba(79, 70, 229, 0.08);
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .benefit-text {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .timer {
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            color: var(--love);
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { background: rgba(236, 72, 153, 0.1); }
+            50% { background: rgba(236, 72, 153, 0.15); }
+        }
+
+
+        .cta-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-200%); }
+            100% { transform: rotate(45deg) translateX(200%); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="premium-badge">
+            ✨ Family Vision 2025
+        </div>
+
+        <div class="vision-icon">
+            👨‍👩‍👧‍👦
+        </div>
+        
+        <h1 class="headline">Build Your Family's Dream Future</h1>
+        
+        <p class="tagline">Transform Dreams Into Reality For Those You Love</p>
+
+        <div class="benefits">
+            <div class="benefit">
+                <div class="benefit-icon">🏠</div>
+                <div class="benefit-text">Dream Home</div>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">📚</div>
+                <div class="benefit-text">Best Education</div>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">✈️</div>
+                <div class="benefit-text">Family Trips</div>
+            </div>
+            <div class="benefit">
+                <div class="benefit-icon">💰</div>
+                <div class="benefit-text">Secure Future</div>
+            </div>
+        </div>
+
+        <div class="timer" id="countdown">
+            <span>⏰</span>
+            <span>Limited Time: 2:45</span>
+        </div>
+        
+        <button class="cta-button" id="ctaButton">
+            SECURE YOUR FAMILY'S FUTURE NOW 🌟
+        </button>
+
+    </div>
+
+    <script>
+        function startCountdown() {
+            let timeLeft = 165;
+            const countdownElement = document.getElementById('countdown');
+            
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.innerHTML = `
+                    <span>⏰</span>
+                    <span>Limited Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}</span>
+                `;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = `
+                        <span>⏰</span>
+                        <span>Opportunity Closed!</span>
+                    `;
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+
+        document.getElementById('ctaButton').addEventListener('click', function() {
+            window.location.href = 'https://a.averantix.com/click';
+        });
+
+        startCountdown();
+    </script>
+</body>
+
+
+
+</html>
