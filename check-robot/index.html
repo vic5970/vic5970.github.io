@@ -12,448 +12,449 @@
 <noscript><link rel="stylesheet" href="https://a.averantix.com/t/t.css?mc_ns=1" /></noscript>
 <!-- End MaxConv Tracking Script Base Code-->
 
-    <style>
-        :root {
-            --primary-color: #4285f4;
-            --white: #ffffff;
-            --shadow: 0 2px 6px rgba(0,0,0,0.2);
-            --text-color: #545454;
-            --border-color: #dadada;
-        }
+<style>
+    :root {
+        --primary-color: #4285f4;
+        --white: #ffffff;
+        --shadow: 0 2px 6px rgba(0,0,0,0.2);
+        --text-color: #545454;
+        --border-color: #dadada;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-        body {
-            min-height: 100vh;
-            background: var(--primary-color);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    body {
+        min-height: 100vh;
+        background: var(--primary-color);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 20px;
+        margin-bottom: 60px;
+    }
+
+    h1 {
+        color: var(--white);
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .captcha-card {
+        background: var(--white);
+        padding: 16px 20px;
+        border-radius: 3px;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 320px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .verify-section {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .checkbox-container {
+        width: 24px;
+        height: 24px;
+        position: relative;
+    }
+
+    .checkbox {
+        width: 100%;
+        height: 100%;
+        border: 2px solid var(--border-color);
+        border-radius: 2px;
+        transition: border-color 0.2s ease;
+    }
+
+    .captcha-card:hover .checkbox {
+        border-color: var(--primary-color);
+    }
+
+    .loader {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .verify-text {
+        color: var(--text-color);
+        font-size: 16px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .brand img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .brand-text {
+        color: #9e9e9e;
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .footer {
+        width: 100%;
+        padding: 12px;
+        text-align: center;
+        background: transparent;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+    .links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 8px;
+    }
+
+    .links a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 12px;
+        opacity: 0.85;
+        transition: opacity 0.2s ease;
+    }
+
+    .links a:hover {
+        opacity: 1;
+    }
+
+    .copyright {
+        color: var(--white);
+        font-size: 11px;
+        opacity: 0.7;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* RTL Support */
+    [dir="rtl"] .verify-section,
+    [dir="rtl"] .brand {
+        flex-direction: row-reverse;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 480px) {
         .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 32px;
-            padding: 20px;
-            margin-bottom: 60px;
-        }
-
-        h1 {
-            color: var(--white);
-            font-size: 24px;
-            font-weight: 500;
-            text-align: center;
+            gap: 24px;
         }
 
         .captcha-card {
-            background: var(--white);
-            padding: 16px 20px;
-            border-radius: 3px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 320px;
-            cursor: pointer;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .verify-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .checkbox-container {
-            width: 24px;
-            height: 24px;
-            position: relative;
-        }
-
-        .checkbox {
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--border-color);
-            border-radius: 2px;
-            transition: border-color 0.2s ease;
-        }
-
-        .captcha-card:hover .checkbox {
-            border-color: var(--primary-color);
-        }
-
-        .loader {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .verify-text {
-            color: var(--text-color);
-            font-size: 16px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .brand img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .brand-text {
-            color: #9e9e9e;
-            font-size: 11px;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        .footer {
-            width: 100%;
-            padding: 12px;
-            text-align: center;
-            background: transparent;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        .links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 8px;
-        }
-
-        .links a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 12px;
-            opacity: 0.85;
-            transition: opacity 0.2s ease;
-        }
-
-        .links a:hover {
-            opacity: 1;
-        }
-
-        .copyright {
-            color: var(--white);
-            font-size: 11px;
-            opacity: 0.7;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* RTL Support */
-        [dir="rtl"] .verify-section,
-        [dir="rtl"] .brand {
-            flex-direction: row-reverse;
-        }
-
-        /* Mobile Optimizations */
-        @media (max-width: 480px) {
-            .main-content {
-                gap: 24px;
-            }
-
-            .captcha-card {
-                width: 95%;
-                max-width: 340px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-        }
-
-        /* Touch Device Optimizations */
-        @media (hover: none) {
-            .captcha-card:hover .checkbox {
-                border-color: var(--border-color);
-            }
-        }
-
-        /* High Contrast Mode */
-        @media (forced-colors: active) {
-            .checkbox {
-                border: 2px solid CanvasText;
-            }
-        }
-
-        .captcha-link {
-            text-decoration: none;
             width: 95%;
             max-width: 340px;
+        }
+
+        h1 {
+            font-size: 22px;
+        }
+    }
+
+    /* Touch Device Optimizations */
+    @media (hover: none) {
+        .captcha-card:hover .checkbox {
+            border-color: var(--border-color);
+        }
+    }
+
+    /* High Contrast Mode */
+    @media (forced-colors: active) {
+        .checkbox {
+            border: 2px solid CanvasText;
+        }
+    }
+
+    .captcha-link {
+        text-decoration: none;
+        width: 95%;
+        max-width: 340px;
 
 }
 
-    </style>
+.checkbox {
+width: 20px;
+height: 20px;
+border: 2px solid #4285f4;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+position: relative;
+}
+
+.checkbox.checked::after {
+content: '✔';
+font-size: 16px;
+color: #4285f4;
+position: absolute;
+}
+
+
+</style>
 </head>
 <body>
-    <div class="main-content">
-        <h1>Confirm you're not a robot</h1>
-        <a href="https://a.averantix.com/click" class="captcha-link">
-        <div class="captcha-card">
-            <div class="verify-section">
-                <div class="checkbox-container">
-                    <div class="checkbox" role="checkbox" tabindex="0"></div>
-                    <div class="loader" aria-hidden="true"></div>
-                </div>
-                <span class="verify-text">Confirm</span>
+<div class="main-content">
+    <h1>Confirm you're not a robot</h1>
+    <a href="https://a.averantix.com/click" class="captcha-link">
+    <div class="captcha-card">
+        <div class="verify-section">
+            <div class="checkbox-container">
+                <div class="checkbox" role="checkbox" tabindex="0"></div>
+                <div class="loader" aria-hidden="true"></div>
             </div>
-            <div class="brand">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyODVmNCIgZD0iTTEyIDJMNCA3djEwbDggNWw4LTVWN2wtOC01em0wIDJsNiAzLjV2N0wxMiAxOGwtNi0zLjVWNy41TDEyIDR6Ii8+PC9zdmc+" alt="Security">
-                <div class="brand-text">Protected by<br>ADEX.com</div>
-            </div>
+            <span class="verify-text">Confirm</span>
         </div>
-    </a>
+        <div class="brand">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyODVmNCIgZD0iTTEyIDJMNCA3djEwbDggNWw4LTVWN2wtOC01em0wIDJsNiAzLjV2N0wxMiAxOGwtNi0zLjVWNy41TDEyIDR6Ii8+PC9zdmc+" alt="Security">
+            <div class="brand-text">Protected by<br>ADEX.com</div>
+        </div>
     </div>
+</a>
+</div>
 
-    <footer class="footer">
-        <div class="links">
-            <a href="https://a.averantix.com/click">Privacy Policy</a>
-            <a href="https://a.averantix.com/click">Cookie Policy</a>
-            <a href="https://a.averantix.com/click">Terms of agreement</a>
-        </div>
-        <div class="copyright">© Copyright 2025</div>
-    </footer>
+<footer class="footer">
+    <div class="links">
+        <a href="https://a.averantix.com/click">Privacy Policy</a>
+        <a href="https://a.averantix.com/click">Cookie Policy</a>
+        <a href="https://a.averantix.com/click">Terms of agreement</a>
+    </div>
+    <div class="copyright">© Copyright 2025</div>
+</footer>
 
-    <script>
-        // Language detection and translations
-        const translations = {
-            'en': {
-        title: "Confirm you're not a robot",
-        verify: "Confirm",
-        protected: "Protected by",
-        privacy: "Privacy Policy",
-        cookie: "Cookie Policy",
-        terms: "Terms of agreement",
-        copyright: "© Copyright 2025"
-    },
-    'ar': {
-        title: "تأكيد أنك لست روبوتًا",
-        verify: "تأكيد",
-        protected: "محمي بواسطة",
-        privacy: "سياسة الخصوصية",
-        cookie: "سياسة ملفات تعريف الارتباط",
-        terms: "شروط الاستخدام",
-        copyright: "© حقوق النشر 2025"
-    },
+<script>
+    // Language detection and translations
+    const translations = {
+        'en': {
+    title: "Confirm you're not a robot",
+    verify: "Confirm",
+    protected: "Protected by",
+    privacy: "Privacy Policy",
+    cookie: "Cookie Policy",
+    terms: "Terms of agreement",
+    copyright: "© Copyright 2025"
+},
+'ar': {
+    title: "تأكيد أنك لست روبوتًا",
+    verify: "تأكيد",
+    protected: "محمي بواسطة",
+    privacy: "سياسة الخصوصية",
+    cookie: "سياسة ملفات تعريف الارتباط",
+    terms: "شروط الاستخدام",
+    copyright: "© حقوق النشر 2025"
+},
 
-    // اللغات الجديدة
-    'th': { // تايلند
-        title: "ยืนยันว่าคุณไม่ใช่หุ่นยนต์",
-        verify: "ยืนยัน",
-        protected: "ป้องกันโดย",
-        privacy: "นโยบายความเป็นส่วนตัว",
-        cookie: "นโยบายคุกกี้",
-        terms: "ข้อตกลงการใช้งาน",
-        copyright: "© ลิขสิทธิ์ 2025"
-    },
-    'tl': { // الفلبين
-        title: "Kumpirmahing hindi ka robot",
-        verify: "Kumpirmahin",
-        protected: "Protektado ng",
-        privacy: "Patakaran sa Privacy",
-        cookie: "Patakaran sa Cookie",
-        terms: "Mga Tuntunin ng Kasunduan",
-        copyright: "© Karapatang-ari 2025"
-    },
-    'id': { // إندونيسيا
-        title: "Konfirmasi bahwa Anda bukan robot",
-        verify: "Konfirmasi",
-        protected: "Dilindungi oleh",
-        privacy: "Kebijakan Privasi",
-        cookie: "Kebijakan Cookie",
-        terms: "Persyaratan Penggunaan",
-        copyright: "© Hak Cipta 2025"
-    },
-    'hi': { // الهند
-        title: "पुष्टि करें कि आप रोबोट नहीं हैं",
-        verify: "पुष्टि करें",
-        protected: "द्वारा संरक्षित",
-        privacy: "गोपनीयता नीति",
-        cookie: "कुकी नीति",
-        terms: "उपयोग की शर्तें",
-        copyright: "© कॉपीराइट 2025"
-    },
-    'ur': { // باكستان
-        title: "تصدیق کریں کہ آپ روبوٹ نہیں ہیں",
-        verify: "تصدیق کریں",
-        protected: "محفوظ کردہ از",
-        privacy: "رازداری کی پالیسی",
-        cookie: "کوکی پالیسی",
-        terms: "استعمال کی شرائط",
-        copyright: "© جملہ حقوق محفوظ 2025"
-    },
-    'ja': { // اليابان
-        title: "ロボットではないことを確認",
-        verify: "確認",
-        protected: "保護: ",
-        privacy: "プライバシーポリシー",
-        cookie: "クッキーポリシー",
-        terms: "利用規約",
-        copyright: "© 著作権 2025"
-    },
-    'pt': { // البرازيل
-        title: "Confirme que você não é um robô",
-        verify: "Confirmar",
-        protected: "Protegido por",
-        privacy: "Política de Privacidade",
-        cookie: "Política de Cookies",
-        terms: "Termos de Uso",
-        copyright: "© Direitos Autorais 2025"
-    },
-    'vi': { // فيتنام
-        title: "Xác nhận bạn không phải là robot",
-        verify: "Xác nhận",
-        protected: "Được bảo vệ bởi",
-        privacy: "Chính sách Bảo mật",
-        cookie: "Chính sách Cookie",
-        terms: "Điều khoản Sử dụng",
-        copyright: "© Bản quyền 2025"
-    },
-    'ms': { // ماليزيا
-        title: "Sahkan anda bukan robot",
-        verify: "Sahkan",
-        protected: "Dilindungi oleh",
-        privacy: "Dasar Privasi",
-        cookie: "Dasar Cookie",
-        terms: "Syarat Penggunaan",
-        copyright: "© Hak Cipta 2025"
-    },
-    'de': { // المانيا
-        title: "Bestätigen Sie, dass Sie kein Roboter sind",
-        verify: "Bestätigen",
-        protected: "Geschützt durch",
-        privacy: "Datenschutzerklärung",
-        cookie: "Cookie-Richtlinie",
-        terms: "Nutzungsbedingungen",
-        copyright: "© Urheberrecht 2025"
-    },
-    'es': { // إسبانيا، المكسيك، الأرجنتين، كولومبيا، البيرو
-        title: "Confirma que no eres un robot",
-        verify: "Confirmar",
-        protected: "Protegido por",
-        privacy: "Política de Privacidad",
-        cookie: "Política de Cookies",
-        terms: "Términos de Uso",
-        copyright: "© Derechos Reservados 2025"
-    },
-    'fr': { // فرنسا، كندا
-        title: "Confirmez que vous n'êtes pas un robot",
-        verify: "Confirmer",
-        protected: "Protégé par",
-        privacy: "Politique de Confidentialité",
-        cookie: "Politique des Cookies",
-        terms: "Conditions d'Utilisation",
-        copyright: "© Droits d'auteur 2025"
-    },
-    'it': { // إيطاليا
-        title: "Conferma di non essere un robot",
-        verify: "Conferma",
-        protected: "Protetto da",
-        privacy: "Informativa sulla Privacy",
-        cookie: "Politica dei Cookie",
-        terms: "Termini di Utilizzo",
-        copyright: "© Copyright 2025"
-    },
-    'zh': { // تايوان
-        title: "請確認您不是機器人",
-        verify: "確認",
-        protected: "受保護",
-        privacy: "隱私政策",
-        cookie: "Cookie 政策",
-        terms: "使用條款",
-        copyright: "© 版權所有 2025"
-    }
+// اللغات الجديدة
+'th': { // تايلند
+    title: "ยืนยันว่าคุณไม่ใช่หุ่นยนต์",
+    verify: "ยืนยัน",
+    protected: "ป้องกันโดย",
+    privacy: "นโยบายความเป็นส่วนตัว",
+    cookie: "นโยบายคุกกี้",
+    terms: "ข้อตกลงการใช้งาน",
+    copyright: "© ลิขสิทธิ์ 2025"
+},
+'tl': { // الفلبين
+    title: "Kumpirmahing hindi ka robot",
+    verify: "Kumpirmahin",
+    protected: "Protektado ng",
+    privacy: "Patakaran sa Privacy",
+    cookie: "Patakaran sa Cookie",
+    terms: "Mga Tuntunin ng Kasunduan",
+    copyright: "© Karapatang-ari 2025"
+},
+'id': { // إندونيسيا
+    title: "Konfirmasi bahwa Anda bukan robot",
+    verify: "Konfirmasi",
+    protected: "Dilindungi oleh",
+    privacy: "Kebijakan Privasi",
+    cookie: "Kebijakan Cookie",
+    terms: "Persyaratan Penggunaan",
+    copyright: "© Hak Cipta 2025"
+},
+'hi': { // الهند
+    title: "पुष्टि करें कि आप रोबोट नहीं हैं",
+    verify: "पुष्टि करें",
+    protected: "द्वारा संरक्षित",
+    privacy: "गोपनीयता नीति",
+    cookie: "कुकी नीति",
+    terms: "उपयोग की शर्तें",
+    copyright: "© कॉपीराइट 2025"
+},
+'ur': { // باكستان
+    title: "تصدیق کریں کہ آپ روبوٹ نہیں ہیں",
+    verify: "تصدیق کریں",
+    protected: "محفوظ کردہ از",
+    privacy: "رازداری کی پالیسی",
+    cookie: "کوکی پالیسی",
+    terms: "استعمال کی شرائط",
+    copyright: "© جملہ حقوق محفوظ 2025"
+},
+'ja': { // اليابان
+    title: "ロボットではないことを確認",
+    verify: "確認",
+    protected: "保護: ",
+    privacy: "プライバシーポリシー",
+    cookie: "クッキーポリシー",
+    terms: "利用規約",
+    copyright: "© 著作権 2025"
+},
+'pt': { // البرازيل
+    title: "Confirme que você não é um robô",
+    verify: "Confirmar",
+    protected: "Protegido por",
+    privacy: "Política de Privacidade",
+    cookie: "Política de Cookies",
+    terms: "Termos de Uso",
+    copyright: "© Direitos Autorais 2025"
+},
+'vi': { // فيتنام
+    title: "Xác nhận bạn không phải là robot",
+    verify: "Xác nhận",
+    protected: "Được bảo vệ bởi",
+    privacy: "Chính sách Bảo mật",
+    cookie: "Chính sách Cookie",
+    terms: "Điều khoản Sử dụng",
+    copyright: "© Bản quyền 2025"
+},
+'ms': { // ماليزيا
+    title: "Sahkan anda bukan robot",
+    verify: "Sahkan",
+    protected: "Dilindungi oleh",
+    privacy: "Dasar Privasi",
+    cookie: "Dasar Cookie",
+    terms: "Syarat Penggunaan",
+    copyright: "© Hak Cipta 2025"
+},
+'de': { // المانيا
+    title: "Bestätigen Sie, dass Sie kein Roboter sind",
+    verify: "Bestätigen",
+    protected: "Geschützt durch",
+    privacy: "Datenschutzerklärung",
+    cookie: "Cookie-Richtlinie",
+    terms: "Nutzungsbedingungen",
+    copyright: "© Urheberrecht 2025"
+},
+'es': { // إسبانيا، المكسيك، الأرجنتين، كولومبيا، البيرو
+    title: "Confirma que no eres un robot",
+    verify: "Confirmar",
+    protected: "Protegido por",
+    privacy: "Política de Privacidad",
+    cookie: "Política de Cookies",
+    terms: "Términos de Uso",
+    copyright: "© Derechos Reservados 2025"
+},
+'fr': { // فرنسا، كندا
+    title: "Confirmez que vous n'êtes pas un robot",
+    verify: "Confirmer",
+    protected: "Protégé par",
+    privacy: "Politique de Confidentialité",
+    cookie: "Politique des Cookies",
+    terms: "Conditions d'Utilisation",
+    copyright: "© Droits d'auteur 2025"
+},
+'it': { // إيطاليا
+    title: "Conferma di non essere un robot",
+    verify: "Conferma",
+    protected: "Protetto da",
+    privacy: "Informativa sulla Privacy",
+    cookie: "Politica dei Cookie",
+    terms: "Termini di Utilizzo",
+    copyright: "© Copyright 2025"
+},
+'zh': { // تايوان
+    title: "請確認您不是機器人",
+    verify: "確認",
+    protected: "受保護",
+    privacy: "隱私政策",
+    cookie: "Cookie 政策",
+    terms: "使用條款",
+    copyright: "© 版權所有 2025"
+}
 };
 
-        // Language detection
-        function detectLanguage() {
-            const userLang = navigator.language || navigator.userLanguage;
-            const baseLang = userLang.split('-')[0];
-            return translations[baseLang] || translations['en'];
-        }
+    // Language detection
+    function detectLanguage() {
+        const userLang = navigator.language || navigator.userLanguage;
+        const baseLang = userLang.split('-')[0];
+        return translations[baseLang] || translations['en'];
+    }
 
-        // Set RTL if needed
-        const isRTL = ['ar', 'he', 'fa'].includes(navigator.language.split('-')[0]);
-        if (isRTL) {
-            document.documentElement.setAttribute('dir', 'rtl');
-        }
+    // Set RTL if needed
+    const isRTL = ['ar', 'he', 'fa'].includes(navigator.language.split('-')[0]);
+    if (isRTL) {
+        document.documentElement.setAttribute('dir', 'rtl');
+    }
 
+// Verification handler
 // Удаляем автоматический редирект
 function handleVerification() {
-    const checkbox = document.querySelector('.checkbox');
-    const loader = document.querySelector('.loader');
+const checkbox = document.querySelector('.checkbox');
+const loader = document.querySelector('.loader');
+const link = document.querySelector('.captcha-link');
 
-    if (checkbox.dataset.processing === 'true') return;
-    checkbox.dataset.processing = 'true';
+if (checkbox.dataset.processing === 'true') return;
+checkbox.dataset.processing = 'true';
 
-    checkbox.style.display = 'none';
-    loader.style.display = 'block';
+checkbox.classList.add('checked'); // Добавляем класс для галочки
+loader.style.display = 'block';
 
-    setTimeout(() => {
-        // Удаляем редирект
-        loader.style.display = 'none';
-        checkbox.style.display = 'block';
-    }, 1500);
+setTimeout(() => {
+    loader.style.display = 'none';
+    window.location.href = link.href; // Переход по ссылке после проверки
+}, 1500);
 }
 
+// Добавляем обработчики событий после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+document.querySelector('.captcha-card').addEventListener('click', (e) => {
+    e.preventDefault(); // Отменяем мгновенный переход по ссылке
+    handleVerification();
+});
+});
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            const t = detectLanguage();
-          
-            // Apply translations
-            document.title = t.title;
-            document.querySelector('h1').textContent = t.title;
-            document.querySelector('.verify-text').textContent = t.verify;
-            document.querySelector('.brand-text').innerHTML = `${t.protected}<br>ADEX.com`;
-          
-            const links = document.querySelectorAll('.links a');
-            links[0].textContent = t.privacy;
-            links[1].textContent = t.cookie;
-            links[2].textContent = t.terms;
-          
-            document.querySelector('.copyright').textContent = t.copyright;
-
-            // Add event listeners
-            document.querySelector('.captcha-card').addEventListener('click', handleVerification);
-            document.querySelector('.checkbox').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleVerification();
-                }
-            });
-        });
-    </script>
+</script>
 </body>
 </html>
