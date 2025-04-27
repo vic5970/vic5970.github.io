@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/love_heart_icon_178900.ico">
+    <title>Find Your Perfect Match</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 0; 
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('') no-repeat center center fixed;
+            background-size: cover;
+            color: white; 
+            position: relative;
+            background-color: #000000;
+        }
+        /* Фоновые изображения для десктопа и мобильных */
+       @media (min-width: 769px) {
+            body {
+                background-image: url('img/bg2-1920x1080.webp'); 
+                /* Замените на путь к вашему изображению для десктопа */
+            }
+        } 
+
+        @media (max-width: 768px) {
+           body {
+                background-image: url('img/phon-mobile-19.webp');  
+                /*Замените на путь к вашему изображению для мобильных */
+            }
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.0);
+            z-index: 0;
+        }
+        .container { 
+            max-width: 400px; 
+            position: relative; 
+            z-index: 1;
+        }
+        .cta-button { 
+            background: #ff4081; 
+            padding: 12px; 
+            display: inline-block; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-size: 22px; 
+            margin-top: 30px; 
+        }
+        .cta-button:hover { background: #e91e63; }
+        .options { margin-top: 20px; }
+        .option { 
+            background: #222; 
+            padding: 12px; 
+            margin: 5px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .option:hover { background: #444; }
+        .see-more { 
+            background: #ff9800; 
+            padding: 12px; 
+            margin-top: 10px;
+            border-radius: 5px;
+            margin: 5px;  
+            cursor: pointer; 
+        }
+        .see-more:hover { background: #e68900; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥Join Local <br>Sex Community🔥</h1>
+      <!-- <div class="options">
+            <div class="option" onclick="redirect()">Singles</div>
+            <div class="option" onclick="redirect()">Couples</div>
+            <div class="option" onclick="redirect()">Mature</div>
+            <div class="option" onclick="redirect()">Swingers</div>
+            <div class="see-more" onclick="redirect()">See More...</div>
+        </div>-->
+        <a href="YOUR_SMARTLINK_URL" class="cta-button" id="cta-button">Find Matches Now ➤</a>
+    </div>
+    <script>
+        function redirect() {
+            document.getElementById('cta-button').click();
+        }
+    </script>
+</body>
+</html>
