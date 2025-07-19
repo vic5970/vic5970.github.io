@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify Your Identity!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      background-color: #000;
+      position: relative;
+      z-index: 0;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('ms30.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(45deg, rgba(238,131,248,0.6), rgba(110,4,110,0.6));
+      z-index: -1;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 1s ease-out;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      background-color: #ff0077;
+      color: #fff;
+      border: 3px solid #fff;
+      padding: 1rem 2.5rem;
+      font-size: 1.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button:hover {
+      background-color: #da0078;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #3498db, #8e44ad);
+      margin: 10vh auto;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .close {
+      color: #fff;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ccc;
+    }
+
+    .background-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .background-animation span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      animation: move 25s infinite linear;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(100vh) scale(0);
+      }
+      100% {
+        transform: translateY(-100vh) scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .cta-button {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 1rem;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-animation"></div>
+
+  <div class="container">
+    <h1>Verify Your Identity!</h1>
+    <p>To ensure you are not a robot, click the button below to get started!</p>
+    <button class="cta-button" id="startButton">Start Now!</button>
+  </div>
+
+  <div id="downloadModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Download the App</h2>
+      <p>To complete the verification process, please download the app now.</p>
+      <button class="cta-button" id="downloadButton" onclick="window.location.href='https://google.com';">Download the App</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startButton = document.getElementById('startButton');
+      const modal = document.getElementById('downloadModal');
+      const closeButton = document.getElementsByClassName('close')[0];
+      const backgroundAnimation = document.querySelector('.background-animation');
+
+      // Create floating animation elements
+      for (let i = 0; i < 10; i++) {
+        const span = document.createElement('span');
+        span.style.left = `${Math.random() * 100}%`;
+        span.style.animationDelay = `${Math.random() * 5}s`;
+        backgroundAnimation.appendChild(span);
+      }
+
+      startButton.addEventListener('click', () => {
+        modal.style.display = 'block';
+      });
+
+      closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
