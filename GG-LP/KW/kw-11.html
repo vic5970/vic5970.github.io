@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انطلق إلى عالم الألعاب</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img-kw/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img-kw/fav/favicon-16x16.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffff00;
+            --background-color: #000033;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Rajdhani', sans-serif;
+            /*background-image: url('img-kw/4game.webp');*/
+            background: linear-gradient(rgba(48, 48, 48, 0.1), rgba(54, 54, 54, 0.1)), url('img-kw/11game.webp');
+            color: var(--text-color);
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            
+        }
+
+        #app {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 1rem;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            background: rgba(43, 13, 13, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(179, 177, 161, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.438);
+            max-width: 90vw;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+        }
+
+        p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .cta-button:hover, .cta-button:active {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+            margin: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        #mini-game {
+            margin-top: 1.5rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            cursor: pointer;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1.5rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="canvas-container"></div>
+        <div class="content">
+            <h1>انطلق إلى عالم الألعاب</h1>
+            <p>اكتشف تجربة لعب غامرة على مستوى جديد. هل أنت مستعد لخوض مغامرة ملحمية؟</p>
+            <a href="https://a.averantix.com/click" id="cta-button" class="cta-button">العب الآن</a>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="players-online">5022</div>
+                    <div>لاعبين متصلين</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-battles">10091</div>
+                    <div>معارك خيضت</div>
+                </div>
+            </div>
+            <div id="mini-game">🔥 أفضل الألعاب لعام 2025! العب الآن! 🔥 <span id="score"></span></div>
+        </div>
+    </div>
+</body>
+</html>
