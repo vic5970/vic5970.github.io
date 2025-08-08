@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #272837;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .box {
+      max-width: 500px;
+      margin: 100px auto;
+      background: #1e1f2b;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 24px;
+      color: #2ecc71;
+    }
+    p {
+      font-size: 16px;
+      color: #ccc;
+      margin-top: 10px;
+    }
+    .loader {
+      margin: 30px auto 0;
+      border: 6px solid #444;
+      border-top: 6px solid #2ecc71;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Thank you!</h1>
+    <p>Your submission has been received.<br>Please wait while we verify your request...</p>
+    <div class="loader"></div>
+  </div>
+</body>
+</html>

