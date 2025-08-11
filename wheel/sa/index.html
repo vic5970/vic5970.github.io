@@ -386,7 +386,7 @@ html{ scrollbar-gutter:stable both-edges; }
 <!-- INTRO MODAL -->
 <div id="introModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introText">
   <div class="card">
-    <img class="prizeImg" id="introHero" src="img/winner1.webp" alt="">
+    <img class="prizeImg" id="introHero" src="img/winner1m.webp" alt="">
     <div class="introLang" id="introLang">
       <button class="lang-chip" id="introEN" aria-label="Switch to English">EN</button>
       <button class="lang-chip" id="introAR" aria-label="التبديل إلى العربية">AR</button>
@@ -626,7 +626,7 @@ var N = 8, STEP = 360 / N;                          // нужны только �
 /* ========= THEME (wheel + accent colors) ========= */
 var urlTheme = new URLSearchParams(location.search).get('theme'); // gb | gv
 var THEMES = {
-  gb: { src: 'img/wheel_1024-1.webp', offset: 22 }, // gold+blue
+  gb: { src: 'img/wheel_1024-2.webp', offset: 22 }, // gold+blue
   gv: { src: 'img/wheel_1024-3m.webp', offset: 22 }  // green+violet
 };
 var THEME_KEY = (urlTheme||'gb').toLowerCase();
@@ -691,7 +691,7 @@ function doSpin(){
   function onEnd(){
   // снимаем will-change, чтобы браузер не держал лишний слой
     wheelEl.style.willChange = 'auto';
-    
+
     currentAngle = target;
     spins++;
     triesEl.textContent = (3 - spins);
